@@ -1,0 +1,943 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Designkonzept für Taubglück – die Dating-App für gehörlose, schwerhörige und taubblinde Menschen, CODAs und Gebärdensprachdolmetscher*innen.">
+<!--HEAD:START-->
+<title>Taubglück Redesign</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,800&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* ============================================================
+   Taubglück — Designkonzept
+   Farbe : warmes Tintenschwarz + Marken-Gelb + Signalfarben
+   Schrift: Bricolage Grotesque (Display) / Atkinson Hyperlegible
+            (Fließtext, entwickelt für maximale Lesbarkeit) / DM Mono (Labels)
+   Layout : "Sichtachsen" — breite Bänder, freie Blickfelder, viel Luft
+   ============================================================ */
+
+:root{
+  /* dunkel = Standard (Dark-first) */
+  --bg:        #171412;
+  --bg-2:      #1F1B18;
+  --bg-3:      #29241F;
+  --line:      #3A332C;
+  --line-soft: #2A251F;
+
+  --fg:        #F6F3EE;
+  --fg-2:      #C3BAAF;
+  --fg-3:      #8E857A;
+
+  --gold:      #FFC21A;
+  --gold-ink:  #17130A;   /* Text auf Gold */
+  --gold-text: #FFC21A;   /* Gold als Textfarbe */
+  --gold-soft: rgba(255,194,26,.12);
+
+  --verify:    #5BC8A8;
+  --verify-soft: rgba(91,200,168,.14);
+  --coral:     #FF8B78;
+
+  --shadow: 0 1px 2px rgba(0,0,0,.4), 0 18px 44px -18px rgba(0,0,0,.75);
+  --shadow-lift: 0 2px 4px rgba(0,0,0,.35), 0 34px 70px -24px rgba(0,0,0,.85);
+
+  --measure: 62ch;
+  --band: clamp(4.5rem, 9vw, 8.5rem);
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+  --radius: 18px;
+
+  --ff-display: "Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+  --ff-body: "Atkinson Hyperlegible", "Verdana", system-ui, sans-serif;
+  --ff-mono: "DM Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --bg:        #FBF8F3;
+    --bg-2:      #FFFFFF;
+    --bg-3:      #F2ECE1;
+    --line:      #DCD3C5;
+    --line-soft: #EAE3D7;
+
+    --fg:        #1A1613;
+    --fg-2:      #4E463D;
+    --fg-3:      #776C60;
+
+    --gold:      #FFC21A;
+    --gold-ink:  #17130A;
+    --gold-text: #7A5500;
+    --gold-soft: rgba(255,194,26,.20);
+
+    --verify:    #157A5C;
+    --verify-soft: rgba(21,122,92,.12);
+    --coral:     #C2432F;
+
+    --shadow: 0 1px 2px rgba(60,45,20,.06), 0 16px 40px -20px rgba(60,45,20,.30);
+    --shadow-lift: 0 2px 4px rgba(60,45,20,.07), 0 34px 70px -26px rgba(60,45,20,.38);
+  }
+}
+:root[data-theme="light"]{
+  --bg:        #FBF8F3;
+  --bg-2:      #FFFFFF;
+  --bg-3:      #F2ECE1;
+  --line:      #DCD3C5;
+  --line-soft: #EAE3D7;
+
+  --fg:        #1A1613;
+  --fg-2:      #4E463D;
+  --fg-3:      #776C60;
+
+  --gold:      #FFC21A;
+  --gold-ink:  #17130A;
+  --gold-text: #7A5500;
+  --gold-soft: rgba(255,194,26,.20);
+
+  --verify:    #157A5C;
+  --verify-soft: rgba(21,122,92,.12);
+  --coral:     #C2432F;
+
+  --shadow: 0 1px 2px rgba(60,45,20,.06), 0 16px 40px -20px rgba(60,45,20,.30);
+  --shadow-lift: 0 2px 4px rgba(60,45,20,.07), 0 34px 70px -26px rgba(60,45,20,.38);
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--fg);
+  font-family:var(--ff-body);
+  font-size:1.1875rem;      /* 19px — bewusst groß */
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+img,svg{ max-width:100%; }
+
+/* ---------- Grundtypografie ---------- */
+h1,h2,h3,h4{
+  font-family:var(--ff-display);
+  font-weight:800;
+  line-height:1.02;
+  letter-spacing:-.025em;
+  text-wrap:balance;
+  margin:0;
+}
+h1{ font-size:clamp(2.7rem, 6.6vw, 5rem); }
+h2{ font-size:clamp(2rem, 4.4vw, 3.3rem); }
+h3{ font-size:1.3rem; letter-spacing:-.015em; line-height:1.2; }
+p{ margin:0; }
+a{ color:inherit; }
+
+.eyebrow{
+  font-family:var(--ff-mono);
+  font-size:.76rem;
+  font-weight:500;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--gold-text);
+  margin:0;
+}
+.eyebrow--mute{ color:var(--fg-3); }
+.lede{ font-size:1.28rem; line-height:1.55; color:var(--fg-2); max-width:var(--measure); }
+.prose{ max-width:var(--measure); color:var(--fg-2); }
+
+:focus-visible{
+  outline:3px solid var(--gold);
+  outline-offset:3px;
+  border-radius:6px;
+}
+
+.wrap{ width:min(1220px, 100%); margin-inline:auto; padding-inline:var(--gutter); }
+.band{ padding-block:var(--band); }
+.rule{ border:0; border-top:1px solid var(--line-soft); margin:0; }
+
+.skip{
+  position:absolute; left:-9999px; top:0; z-index:99;
+  background:var(--gold); color:var(--gold-ink);
+  padding:.85rem 1.4rem; font-weight:700; border-radius:0 0 10px 0;
+}
+.skip:focus{ left:0; }
+
+/* ---------- Konzept-Hinweis ---------- */
+.concept{
+  background:var(--bg-3); border-bottom:1px solid var(--line);
+  font-family:var(--ff-mono); font-size:.74rem; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--fg-3);
+  padding:.6rem 0; text-align:center;
+}
+
+/* ---------- Buttons ---------- */
+.btn{
+  display:inline-flex; align-items:center; gap:.6rem;
+  font-family:var(--ff-body); font-weight:700; font-size:1.02rem;
+  padding:.95rem 1.5rem; border-radius:999px;
+  border:1.5px solid transparent; text-decoration:none;
+  cursor:pointer; transition:transform .18s ease, background-color .18s ease, border-color .18s ease;
+  min-height:52px;
+}
+.btn:hover{ transform:translateY(-2px); }
+.btn--gold{ background:var(--gold); color:var(--gold-ink); }
+.btn--gold:hover{ background:#FFD04F; }
+.btn--ghost{ background:transparent; color:var(--fg); border-color:var(--line); }
+.btn--ghost:hover{ border-color:var(--gold); }
+
+/* ---------- Header ---------- */
+.head{
+  position:sticky; top:0; z-index:40;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line-soft);
+}
+.head__in{
+  display:flex; align-items:center; gap:1.5rem;
+  min-height:78px;
+}
+.brand{ display:flex; align-items:center; gap:.7rem; text-decoration:none; font-family:var(--ff-display); font-weight:800; font-size:1.32rem; letter-spacing:-.03em; }
+.brand__mark{ width:34px; height:34px; display:block; color:var(--gold); flex:none; }
+.nav{ display:flex; gap:1.6rem; margin-left:auto; }
+.nav a{ text-decoration:none; color:var(--fg-2); font-size:1rem; padding:.35rem 0; border-bottom:2px solid transparent; }
+.nav a:hover{ color:var(--fg); border-bottom-color:var(--gold); }
+.head__cta{ display:flex; align-items:center; gap:.75rem; }
+@media (max-width:940px){ .nav{ display:none; } .head__cta .btn--gold{ display:none; } }
+
+/* DGS-Umschalter — gleichrangig mit der Navigation, kein Nachgedanke */
+.dgs-toggle{
+  display:inline-flex; align-items:center; gap:.55rem;
+  background:var(--bg-2); border:1.5px solid var(--line);
+  color:var(--fg); border-radius:999px; padding:.5rem .95rem .5rem .6rem;
+  font-family:var(--ff-mono); font-size:.78rem; letter-spacing:.1em; text-transform:uppercase;
+  cursor:pointer; min-height:46px;
+}
+.dgs-toggle:hover{ border-color:var(--gold); }
+.dgs-toggle[aria-pressed="true"]{ background:var(--gold); color:var(--gold-ink); border-color:var(--gold); }
+.dgs-toggle__dot{
+  width:26px; height:26px; border-radius:50%; flex:none;
+  display:grid; place-items:center; background:var(--gold-soft); color:var(--gold-text);
+}
+.dgs-toggle[aria-pressed="true"] .dgs-toggle__dot{ background:rgba(0,0,0,.14); color:var(--gold-ink); }
+.dgs-toggle__dot svg{ width:15px; height:15px; }
+
+/* ---------- Hero ---------- */
+.hero{ position:relative; overflow:hidden; padding-block:clamp(2.2rem,4.5vw,4rem) var(--band); }
+/* "Gebärdenraum": der Raum vor dem Körper, in dem in DGS Bedeutung entsteht */
+.hero__space{
+  position:absolute; inset:auto auto 0 50%;
+  width:min(1100px, 130%); aspect-ratio:1/1; translate:-50% 34%;
+  border-radius:50%; pointer-events:none;
+  background:radial-gradient(circle at 50% 50%, var(--gold-soft) 0%, transparent 62%);
+}
+.hero__arc{
+  position:absolute; left:50%; bottom:0; translate:-50% 30%;
+  width:min(980px,120%); aspect-ratio:1/1; border-radius:50%;
+  border:1px solid var(--line); border-bottom-color:transparent; opacity:.6;
+  pointer-events:none;
+}
+.hero__in{ position:relative; display:grid; gap:clamp(2.5rem,5vw,4.5rem); grid-template-columns:1fr; align-items:center; }
+@media (min-width:980px){ .hero__in{ grid-template-columns:1.05fr .95fr; } }
+
+.hero__copy{ display:flex; flex-direction:column; gap:1.6rem; align-items:flex-start; }
+.hero h1 .accent{ color:var(--gold-text); }
+.hero__actions{ display:flex; flex-wrap:wrap; gap:.85rem; }
+
+.stores{ display:flex; flex-wrap:wrap; gap:.7rem; }
+.store{
+  display:inline-flex; align-items:center; gap:.7rem; text-decoration:none;
+  background:var(--bg-2); border:1.5px solid var(--line); border-radius:14px;
+  padding:.6rem 1.1rem .6rem .95rem; color:var(--fg); min-height:56px;
+  transition:border-color .18s ease, transform .18s ease;
+}
+.store:hover{ border-color:var(--gold); transform:translateY(-2px); }
+.store svg{ width:24px; height:24px; flex:none; }
+.store__t{ display:flex; flex-direction:column; line-height:1.12; }
+.store__t small{ font-family:var(--ff-mono); font-size:.62rem; letter-spacing:.12em; text-transform:uppercase; color:var(--fg-3); }
+.store__t span{ font-weight:700; font-size:1.02rem; }
+
+.trust{ display:flex; flex-wrap:wrap; gap:.5rem 1.4rem; padding:0; margin:0; list-style:none; }
+.trust li{ display:flex; align-items:center; gap:.5rem; font-size:.98rem; color:var(--fg-2); }
+.trust svg{ width:17px; height:17px; color:var(--verify); flex:none; }
+
+/* ---------- Telefon-Mockup ---------- */
+.stage{ position:relative; display:grid; place-items:center; padding:2.2rem .5rem 3.1rem; }
+.phone{
+  position:relative; width:min(316px, 80vw); aspect-ratio:9/18.4;
+  background:var(--bg-3); border:10px solid #14110E;
+  border-radius:44px; box-shadow:var(--shadow-lift);
+  overflow:hidden; flex:none;
+}
+:root[data-theme="light"] .phone,
+:root:not([data-theme="dark"]) .phone{ border-color:#231E18; }
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .phone{ border-color:#0E0C0A; } }
+
+.screen{ position:absolute; inset:0; background:#F1F0EE; color:#1A1613; display:flex; flex-direction:column; font-size:.8rem; }
+.screen__bar{ display:flex; align-items:center; justify-content:space-between; padding:.55rem .9rem .3rem; background:#FFC21A; font-family:var(--ff-mono); font-size:.6rem; color:#4A3B12; }
+.screen__title{ background:#FFC21A; color:#17130A; display:flex; align-items:center; justify-content:center; position:relative; padding:.15rem 0 .6rem; font-family:var(--ff-display); font-weight:800; font-size:1.02rem; letter-spacing:-.02em; }
+.screen__burger{ position:absolute; right:.9rem; top:50%; translate:0 -60%; display:flex; flex-direction:column; gap:3px; }
+.screen__burger i{ display:block; width:15px; height:2px; background:#17130A; border-radius:2px; }
+.screen__sub{ display:flex; border-bottom:1px solid #D8D5D0; background:#FBFAF9; }
+.screen__sub span{ flex:1; text-align:center; padding:.42rem 0; font-size:.66rem; color:#4E463D; }
+.screen__sub span+span{ border-left:1px solid #D8D5D0; }
+
+.grid{ flex:1; min-height:0; overflow:hidden; display:grid; grid-template-columns:repeat(3,1fr); gap:2px; padding:2px; align-content:start; }
+.tile{ position:relative; display:flex; flex-direction:column; background:#C9C6C1; }
+.tile__img{ aspect-ratio:1/1; background-size:cover; background-position:center; position:relative; }
+.tile--a .tile__img{ background:linear-gradient(150deg,#8C6A46,#3E2E1F); }
+.tile--b .tile__img{ background:linear-gradient(150deg,#6E8CA0,#2C3A46); }
+.tile--c .tile__img{ background:linear-gradient(150deg,#B08A5E,#5A4128); }
+.tile--d .tile__img{ background:linear-gradient(150deg,#7E9E7A,#33452F); }
+.tile--e .tile__img{ background:linear-gradient(150deg,#A87070,#4A2A2A); }
+.tile--f .tile__img{ background:linear-gradient(150deg,#9A86B0,#3D3350); }
+.tile--g .tile__img{ background:linear-gradient(150deg,#C29A52,#6B4E1C); }
+.tile--h .tile__img{ background:linear-gradient(150deg,#6F9E9A,#2B4442); }
+.tile--empty .tile__img{
+  background:#BFBCB7 center 62% / 54% no-repeat
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 20' fill='%23A6A39E'%3E%3Ccircle cx='12' cy='6.4' r='4.3'/%3E%3Cpath d='M2.8 20c.6-5 4.6-7.4 9.2-7.4s8.6 2.4 9.2 7.4z'/%3E%3C/svg%3E");
+}
+.tile__cap{ background:#FBFAF9; padding:.2rem .18rem .28rem; text-align:center; line-height:1.15; }
+.tile__cap b{ display:block; font-size:.55rem; font-weight:700; color:#1A1613; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.tile__cap span{ display:block; font-size:.5rem; color:#7A7168; }
+.tile__verify{
+  position:absolute; top:3px; right:3px; width:13px; height:13px; border-radius:50%;
+  background:#2C7BE5; color:#fff; display:grid; place-items:center; border:1.5px solid #FBFAF9;
+}
+.tile__verify svg{ width:7px; height:7px; }
+.screen__sample{
+  position:absolute; z-index:2; bottom:.2rem; left:50%; translate:-50% 0; white-space:nowrap;
+  font-family:var(--ff-mono); font-size:.62rem; letter-spacing:.12em; text-transform:uppercase;
+  background:var(--bg-2); color:var(--fg-3); border:1px solid var(--line);
+  border-radius:999px; padding:.3rem .75rem;
+}
+.screen__tabs{ display:flex; justify-content:space-around; align-items:center; padding:.5rem .5rem; background:#FBFAF9; border-top:1px solid #D8D5D0; }
+.screen__tabs svg{ width:19px; height:19px; color:#5B5249; }
+.screen__tabs svg:first-child{ color:#17130A; }
+
+.chip-float{
+  position:absolute; display:flex; align-items:center; gap:.6rem;
+  background:var(--bg-2); border:1.5px solid var(--line); border-radius:16px;
+  padding:.7rem .95rem; box-shadow:var(--shadow); font-size:.9rem; max-width:230px;
+}
+.chip-float svg{ width:19px; height:19px; flex:none; }
+.chip-float--verify{ top:-.2rem; right:-1.4rem; color:var(--fg); }
+.chip-float--verify svg{ color:var(--verify); }
+.chip-float--chat{ bottom:2.9rem; left:-2rem; }
+.chip-float--chat svg{ color:var(--gold-text); }
+@media (max-width:1180px){ .chip-float--verify{ right:-.2rem; } .chip-float--chat{ left:-.4rem; } }
+@media (max-width:560px){ .chip-float{ display:none; } }
+
+/* ---------- Zielgruppen-Laufband ---------- */
+.marquee{ border-block:1px solid var(--line-soft); background:var(--bg-2); overflow:hidden; padding-block:1.15rem; }
+.marquee__track{ display:flex; gap:0; width:max-content; animation:slide 46s linear infinite; }
+.marquee__group{ display:flex; gap:0; }
+.marquee__item{
+  display:inline-flex; align-items:center; gap:1.9rem; padding-inline:.95rem;
+  font-family:var(--ff-display); font-weight:600; font-size:clamp(1.1rem,2.2vw,1.6rem);
+  letter-spacing:-.02em; color:var(--fg-2); white-space:nowrap;
+}
+.marquee__item::after{ content:""; width:7px; height:7px; border-radius:50%; background:var(--gold); }
+@keyframes slide{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+
+/* ---------- Abschnittskopf ---------- */
+.shead{ display:flex; flex-direction:column; gap:1rem; max-width:44ch; }
+.shead--wide{ max-width:56ch; }
+
+/* ---------- DGS-Abschnitt ---------- */
+.dgs{ display:grid; gap:clamp(2rem,4.5vw,4rem); grid-template-columns:1fr; align-items:center; }
+@media (min-width:980px){ .dgs{ grid-template-columns:.9fr 1.1fr; } }
+
+.video{
+  position:relative; aspect-ratio:16/10; border-radius:var(--radius); overflow:hidden;
+  border:1.5px solid var(--line); background:var(--bg-3);
+  display:flex; flex-direction:column; justify-content:space-between;
+  box-shadow:var(--shadow);
+}
+.video__field{
+  position:absolute; inset:0;
+  background:
+    radial-gradient(70% 90% at 50% 44%, rgba(255,194,26,.16), transparent 64%),
+    linear-gradient(160deg, var(--bg-3), var(--bg-2));
+}
+.video__hand{ position:absolute; inset:0; display:grid; place-items:center; color:var(--gold); opacity:.30; }
+.video__hand svg{ width:34%; height:auto; }
+.video__note{
+  position:relative; align-self:flex-start; margin:.9rem;
+  font-family:var(--ff-mono); font-size:.66rem; letter-spacing:.1em; text-transform:uppercase;
+  background:var(--bg); color:var(--fg-3); border:1px solid var(--line); border-radius:999px; padding:.3rem .65rem;
+}
+.video__play{
+  position:absolute; inset:0; margin:auto; width:74px; height:74px; border-radius:50%;
+  background:var(--gold); color:var(--gold-ink); border:0; cursor:pointer;
+  display:grid; place-items:center; box-shadow:var(--shadow);
+  transition:transform .2s ease;
+}
+.video__play:hover{ transform:scale(1.06); }
+.video__play svg{ width:26px; height:26px; margin-left:3px; }
+.video__caption{
+  position:relative; margin:.9rem; padding:.6rem .85rem; border-radius:12px;
+  background:rgba(0,0,0,.55); color:#F6F3EE; font-size:.92rem; line-height:1.35;
+  backdrop-filter:blur(6px); border:1px solid rgba(255,255,255,.10);
+}
+.video__caption b{ font-family:var(--ff-mono); font-size:.6rem; letter-spacing:.12em; text-transform:uppercase; color:#FFD46B; display:block; margin-bottom:.15rem; }
+
+.dgs__list{ list-style:none; margin:1.4rem 0 0; padding:0; display:flex; flex-direction:column; gap:1.1rem; }
+.dgs__list li{ display:flex; gap:.9rem; align-items:flex-start; max-width:var(--measure); }
+.dgs__list svg{ width:22px; height:22px; color:var(--gold-text); flex:none; margin-top:.28rem; }
+.dgs__list strong{ display:block; }
+.dgs__list span{ color:var(--fg-2); font-size:1.02rem; }
+.proposal{
+  display:inline-block; vertical-align:middle; margin-left:.5rem;
+  font-family:var(--ff-mono); font-size:.58rem; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--gold-text); background:var(--gold-soft); border:1px solid color-mix(in srgb, var(--gold) 45%, transparent);
+  border-radius:999px; padding:.16rem .48rem;
+}
+
+/* eingeblendete DGS-Panels */
+.dgs-panel{ display:none; }
+body.dgs-on .dgs-panel{ display:block; }
+.dgs-panel__card{
+  display:flex; align-items:center; gap:1rem; margin-bottom:1.6rem;
+  border:1.5px dashed var(--line); border-radius:14px; padding:.85rem 1rem;
+  background:var(--gold-soft); max-width:var(--measure);
+}
+.dgs-panel__thumb{
+  width:88px; height:60px; border-radius:9px; flex:none; display:grid; place-items:center;
+  background:var(--bg-3); border:1px solid var(--line); color:var(--gold-text);
+}
+.dgs-panel__thumb svg{ width:26px; height:26px; }
+.dgs-panel__t{ font-size:.95rem; color:var(--fg-2); line-height:1.4; }
+.dgs-panel__t strong{ color:var(--fg); display:block; font-size:1rem; }
+
+/* ---------- Funktionen ---------- */
+.feat{ display:grid; gap:1px; background:var(--line-soft); border:1px solid var(--line-soft); border-radius:var(--radius); overflow:hidden; margin-top:3rem; }
+@media (min-width:720px){ .feat{ grid-template-columns:repeat(2,1fr); } }
+@media (min-width:1040px){ .feat{ grid-template-columns:repeat(3,1fr); } }
+.feat__item{ background:var(--bg); padding:2rem 1.7rem; display:flex; flex-direction:column; gap:.7rem; }
+.feat__icon{ width:30px; height:30px; color:var(--gold-text); }
+.feat__item p{ color:var(--fg-2); font-size:1.02rem; }
+
+/* ---------- Sicherheit ---------- */
+.safe{ background:var(--bg-2); border-block:1px solid var(--line-soft); position:relative; overflow:hidden; }
+.safe__mark{
+  position:absolute; right:-4%; top:50%; translate:0 -50%;
+  width:min(420px,38%); color:var(--gold); opacity:.06; pointer-events:none;
+}
+.safe__in{ position:relative; }
+.steps{ counter-reset:s; list-style:none; margin:3rem 0 0; padding:0; display:grid; gap:1.6rem; }
+@media (min-width:860px){ .steps{ grid-template-columns:repeat(3,1fr); gap:2rem; } }
+.steps li{ display:flex; flex-direction:column; gap:.7rem; padding-top:1.3rem; border-top:2px solid var(--gold); }
+.steps__n{ font-family:var(--ff-mono); font-size:.74rem; letter-spacing:.14em; text-transform:uppercase; color:var(--fg-3); }
+.steps p{ color:var(--fg-2); font-size:1.02rem; }
+.safe__note{
+  margin-top:2.8rem; display:flex; gap:.9rem; align-items:flex-start;
+  background:var(--verify-soft); border:1px solid color-mix(in srgb, var(--verify) 35%, transparent);
+  border-radius:14px; padding:1.1rem 1.3rem; max-width:var(--measure);
+}
+.safe__note svg{ width:22px; height:22px; color:var(--verify); flex:none; margin-top:.25rem; }
+.safe__note p{ font-size:1rem; color:var(--fg-2); }
+
+/* ---------- Diskretion ---------- */
+.disc{ display:grid; gap:clamp(2rem,5vw,4rem); grid-template-columns:1fr; }
+@media (min-width:980px){ .disc{ grid-template-columns:1fr 1fr; align-items:start; } }
+.disc__cards{ display:grid; gap:1rem; }
+@media (min-width:600px){ .disc__cards{ grid-template-columns:1fr 1fr; } }
+.disc__card{
+  border:1.5px solid var(--line); border-radius:14px; padding:1.4rem;
+  display:flex; flex-direction:column; gap:.5rem; background:var(--bg-2);
+}
+.disc__card svg{ width:24px; height:24px; color:var(--gold-text); }
+.disc__card h3{ font-size:1.08rem; }
+.disc__card p{ font-size:.98rem; color:var(--fg-2); }
+
+/* ---------- FAQ ---------- */
+.faq{ margin-top:2.8rem; border-top:1px solid var(--line); max-width:78ch; }
+.faq details{ border-bottom:1px solid var(--line); }
+.faq summary{
+  cursor:pointer; list-style:none; padding:1.4rem 3rem 1.4rem 0; position:relative;
+  font-family:var(--ff-display); font-weight:600; font-size:1.18rem; letter-spacing:-.015em;
+}
+.faq summary::-webkit-details-marker{ display:none; }
+.faq summary::after{
+  content:""; position:absolute; right:.4rem; top:50%; width:13px; height:13px;
+  border-right:2.5px solid var(--gold); border-bottom:2.5px solid var(--gold);
+  translate:0 -70%; rotate:45deg; transition:rotate .22s ease;
+}
+.faq details[open] summary::after{ rotate:225deg; translate:0 -20%; }
+.faq details p{ padding:0 0 1.5rem; color:var(--fg-2); max-width:var(--measure); }
+
+/* ---------- Schluss-CTA ---------- */
+.close{ background:var(--gold); color:var(--gold-ink); }
+.close h2{ color:var(--gold-ink); max-width:18ch; }
+.close p{ color:rgba(23,19,10,.78); font-size:1.24rem; max-width:52ch; }
+.close__in{ display:flex; flex-direction:column; gap:1.8rem; align-items:flex-start; }
+.close .store{ background:var(--gold-ink); border-color:var(--gold-ink); color:#F6F3EE; }
+.close .store:hover{ border-color:var(--gold-ink); }
+.close .store__t small{ color:#A79C8C; }
+
+/* ---------- Fuß ---------- */
+.foot{ background:var(--bg-2); border-top:1px solid var(--line-soft); }
+.foot__in{ display:grid; gap:2.5rem; grid-template-columns:1fr; }
+@media (min-width:820px){ .foot__in{ grid-template-columns:1.4fr 1fr 1fr; } }
+.foot h4{ font-family:var(--ff-mono); font-weight:500; font-size:.74rem; letter-spacing:.14em; text-transform:uppercase; color:var(--fg-3); margin:0 0 1rem; }
+.foot ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:.75rem; }
+.foot a{ color:var(--fg-2); text-decoration:none; }
+.foot a:hover{ color:var(--fg); text-decoration:underline; text-underline-offset:4px; }
+.foot__brand p{ color:var(--fg-2); font-size:1rem; max-width:38ch; margin-top:1rem; }
+.foot__bottom{ display:flex; flex-wrap:wrap; gap:1rem; justify-content:space-between; align-items:center; padding-block:1.6rem; border-top:1px solid var(--line-soft); margin-top:2.5rem; font-size:.92rem; color:var(--fg-3); }
+.social{ display:inline-flex; align-items:center; gap:.5rem; text-decoration:none; color:var(--fg-2); }
+.social svg{ width:20px; height:20px; }
+
+/* ---------- Bewegung ---------- */
+.rise{ animation:rise .7s cubic-bezier(.2,.7,.3,1) backwards; }
+.rise:nth-child(2){ animation-delay:.06s; }
+.rise:nth-child(3){ animation-delay:.12s; }
+.rise:nth-child(4){ animation-delay:.18s; }
+.rise:nth-child(5){ animation-delay:.24s; }
+@keyframes rise{ from{ transform:translateY(14px); } to{ transform:translateY(0); } }
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms !important; animation-iteration-count:1 !important;
+    transition-duration:.001ms !important; scroll-behavior:auto !important;
+  }
+  .marquee__track{ width:100%; flex-wrap:wrap; }
+  .btn:hover,.store:hover,.video__play:hover{ transform:none; }
+}
+</style>
+<!--HEAD:END-->
+</head>
+<body>
+<!--BODY:START-->
+<div lang="de">
+
+<a class="skip" href="#main">Zum Inhalt springen</a>
+
+<!-- Wiederverwendete SVG-Symbole -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <!-- ILY-Handzeichen ("Ich liebe dich") — das bestehende Markenzeichen -->
+    <symbol id="i-ily" viewBox="0 0 100 100">
+      <g fill="currentColor">
+        <rect x="2" y="53" width="35" height="13.5" rx="6.75" transform="rotate(-26 19.5 59.75)"/>
+        <rect x="52" y="45" width="11.5" height="18" rx="5.75"/>
+        <rect x="66" y="45" width="11.5" height="18" rx="5.75"/>
+        <rect x="35" y="10" width="13.5" height="52" rx="6.75"/>
+        <rect x="77" y="22" width="13.5" height="40" rx="6.75"/>
+        <rect x="31" y="52" width="61" height="34" rx="15"/>
+      </g>
+    </symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M20 6.5 9.5 17.5 4 12"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" d="M12 2.5 4.5 5.6v6.1c0 4.6 3.1 8.4 7.5 9.8 4.4-1.4 7.5-5.2 7.5-9.8V5.6Z"/><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="m8.8 12 2.3 2.3 4.1-4.6"/></symbol>
+    <symbol id="i-video" viewBox="0 0 24 24"><rect x="2.5" y="6" width="13" height="12" rx="3" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M15.5 11.2 21.5 8v8l-6-3.2Z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" d="M7 4.6 20 12 7 19.4Z"/></symbol>
+    <symbol id="i-caption" viewBox="0 0 24 24"><rect x="2.5" y="4.5" width="19" height="15" rx="3" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M9.5 10.4a2.6 2.6 0 1 0 0 3.2M17 10.4a2.6 2.6 0 1 0 0 3.2" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></symbol>
+    <symbol id="i-filter" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" d="M3 6.5h18M6.5 12h11M10 17.5h4"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" d="M20.5 12.3c0 3.9-3.8 7-8.5 7-1 0-2-.1-2.9-.4L4 20.5l1.3-3.6a6.5 6.5 0 0 1-1.8-4.6c0-3.9 3.8-7 8.5-7s8.5 3.1 8.5 7Z"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.9" d="M2.5 12S6 5.8 12 5.8 21.5 12 21.5 12 18 18.2 12 18.2 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="2.9" fill="none" stroke="currentColor" stroke-width="1.9"/></symbol>
+    <symbol id="i-eye-off" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" d="M4 4.5 20 19.5M9.6 6.3A9.7 9.7 0 0 1 12 6c6 0 9.5 6 9.5 6a17 17 0 0 1-3 3.7M6.1 8.4A16.6 16.6 0 0 0 2.5 12S6 18 12 18c1 0 1.9-.2 2.7-.4"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="m12 3.6 2.6 5.4 5.9.8-4.3 4.1 1.1 5.9-5.3-2.9-5.3 2.9 1.1-5.9L3.5 9.8l5.9-.8Z"/></symbol>
+    <symbol id="i-block" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M6 18 18 6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></symbol>
+    <symbol id="i-id" viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="8.6" cy="11" r="2.2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M5 16.2c.6-1.5 2-2.2 3.6-2.2s3 .7 3.6 2.2M14.6 10h4.2M14.6 13.4h4.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+    <symbol id="i-apple" viewBox="0 0 24 24"><path fill="currentColor" d="M16.4 12.7c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9s-1.8-.8-3-.8c-1.5 0-2.9.9-3.7 2.3-1.6 2.7-.4 6.8 1.1 9 .8 1.1 1.6 2.3 2.8 2.2 1.1 0 1.6-.7 2.9-.7s1.7.7 2.9.7 2-1.1 2.7-2.2c.9-1.2 1.2-2.4 1.3-2.5-.1 0-2.4-.9-2.4-3.6ZM14.2 5.9c.6-.8 1-1.9.9-3-.9 0-2 .6-2.7 1.4-.6.7-1.1 1.8-.9 2.9 1 0 2.1-.5 2.7-1.3Z"/></symbol>
+    <symbol id="i-play-store" viewBox="0 0 24 24"><path fill="currentColor" d="M3.6 2.2c-.3.3-.5.8-.5 1.4v16.8c0 .6.2 1.1.5 1.4l.1.1 9.4-9.4v-.2L3.7 2.1ZM16.3 15.3l-3.1-3.1 3.1-3.1 3.7 2.1c1.1.6 1.1 1.6 0 2.2ZM15.6 15.9l-3.2-3.2-9.3 9.3c.4.4 1 .4 1.7 0ZM15.6 8.1 4.8 2c-.7-.4-1.3-.4-1.7 0l9.3 9.3Z"/></symbol>
+    <symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="9" r="3.3" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M2.8 19.4c.5-3 3.1-4.6 6.2-4.6s5.7 1.6 6.2 4.6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M16.2 6.2a3.3 3.3 0 0 1 0 6.4M17.6 15.2c2.1.5 3.4 1.9 3.7 4.2" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path fill="currentColor" d="M12 20.4 4.6 13.3a4.6 4.6 0 0 1 6.5-6.5l.9.9.9-.9a4.6 4.6 0 1 1 6.5 6.5Z"/></symbol>
+    <symbol id="i-instagram" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5.2" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="17.2" cy="6.8" r="1.15" fill="currentColor"/></symbol>
+  </defs>
+</svg>
+
+<p class="concept">Designkonzept — nicht die offizielle Website</p>
+
+<header class="head">
+  <div class="wrap head__in">
+    <a class="brand" href="#top">
+      <svg class="brand__mark" aria-hidden="true"><use href="#i-ily"></use></svg>
+      Taubglück
+    </a>
+    <nav class="nav" aria-label="Hauptnavigation">
+      <a href="#gebaerde">Gebärdensprache</a>
+      <a href="#app">Die App</a>
+      <a href="#sicherheit">Sicherheit</a>
+      <a href="#faq">Fragen</a>
+    </nav>
+    <div class="head__cta">
+      <button class="dgs-toggle" type="button" data-dgs aria-pressed="false">
+        <span class="dgs-toggle__dot" aria-hidden="true"><svg><use href="#i-video"></use></svg></span>
+        DGS
+      </button>
+      <a class="btn btn--gold" href="#laden">App laden</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="top">
+    <span class="hero__space" aria-hidden="true"></span>
+    <span class="hero__arc" aria-hidden="true"></span>
+    <div class="wrap hero__in">
+      <div class="hero__copy">
+        <p class="eyebrow rise">Jetzt im App&nbsp;Store und bei Google&nbsp;Play</p>
+        <h1 class="rise">Liebe entsteht im <span class="accent">Blickkontakt</span>.</h1>
+        <p class="lede rise">Die Dating-App für gehörlose, schwerhörige und taubblinde Menschen, CODAs und Gebärdensprachdolmetscher*innen. Stöbern, schreiben, sehen wer da war — ganz ohne Ton.</p>
+        <div class="stores rise">
+          <a class="store" href="#laden">
+            <svg aria-hidden="true"><use href="#i-apple"></use></svg>
+            <span class="store__t"><small>Laden im</small><span>App&nbsp;Store</span></span>
+          </a>
+          <a class="store" href="#laden">
+            <svg aria-hidden="true"><use href="#i-play-store"></use></svg>
+            <span class="store__t"><small>Jetzt bei</small><span>Google&nbsp;Play</span></span>
+          </a>
+        </div>
+        <ul class="trust rise">
+          <li><svg aria-hidden="true"><use href="#i-check"></use></svg>ID-Verifizierung mit Prüfzeichen</li>
+          <li><svg aria-hidden="true"><use href="#i-check"></use></svg>Blockieren und melden</li>
+          <li><svg aria-hidden="true"><use href="#i-check"></use></svg>Kein Ton, kein Anruf</li>
+        </ul>
+      </div>
+
+      <div class="stage">
+        <div class="phone">
+          <div class="screen" role="img" aria-label="Bildschirmentwurf der Taubglück-App: die Mitgliederübersicht als Raster mit Namen, Alter und Ort. Geprüfte Profile tragen ein blaues Prüfzeichen.">
+            <div class="screen__bar"><span>17:47</span><span>▮▮▮</span></div>
+            <div class="screen__title">Taubglück<span class="screen__burger" aria-hidden="true"><i></i><i></i><i></i></span></div>
+            <div class="screen__sub"><span>Sortieren</span><span>Filter</span></div>
+            <div class="grid">
+              <div class="tile tile--a"><div class="tile__img"><span class="tile__verify" aria-hidden="true"><svg><use href="#i-check"></use></svg></span></div><div class="tile__cap"><b>Bina88_Speedy</b><span>38 · Essen</span></div></div>
+              <div class="tile tile--b"><div class="tile__img"></div><div class="tile__cap"><b>Deafkeywan</b><span>52 · Freiburg</span></div></div>
+              <div class="tile tile--c"><div class="tile__img"></div><div class="tile__cap"><b>GlitzerStern</b><span>44 · Thüringen</span></div></div>
+              <div class="tile tile--empty"><div class="tile__img"></div><div class="tile__cap"><b>Kaihab</b><span>51 · Bayern</span></div></div>
+              <div class="tile tile--d"><div class="tile__img"><span class="tile__verify" aria-hidden="true"><svg><use href="#i-check"></use></svg></span></div><div class="tile__cap"><b>Svetlana</b><span>36 · Hessen</span></div></div>
+              <div class="tile tile--e"><div class="tile__img"></div><div class="tile__cap"><b>Sofiia</b><span>27 · Köln</span></div></div>
+              <div class="tile tile--f"><div class="tile__img"></div><div class="tile__cap"><b>Deafanni</b><span>48 · Frankfurt</span></div></div>
+              <div class="tile tile--g"><div class="tile__img"><span class="tile__verify" aria-hidden="true"><svg><use href="#i-check"></use></svg></span></div><div class="tile__cap"><b>Morkjs</b><span>43 · Mahlow</span></div></div>
+              <div class="tile tile--empty"><div class="tile__img"></div><div class="tile__cap"><b>SaKul</b><span>28 · Köln</span></div></div>
+              <div class="tile tile--h"><div class="tile__img"></div><div class="tile__cap"><b>Deafholger</b><span>58 · Wien</span></div></div>
+              <div class="tile tile--b"><div class="tile__img"></div><div class="tile__cap"><b>lena-ritzer</b><span>40 · Münster</span></div></div>
+              <div class="tile tile--c"><div class="tile__img"></div><div class="tile__cap"><b>LittleFox</b><span>38 · Bodensee</span></div></div>
+            </div>
+            <div class="screen__tabs" aria-hidden="true">
+              <svg><use href="#i-eye"></use></svg>
+              <svg><use href="#i-people"></use></svg>
+              <svg><use href="#i-ily"></use></svg>
+              <svg><use href="#i-heart"></use></svg>
+            </div>
+          </div>
+        </div>
+        <span class="screen__sample">Beispielansicht der App</span>
+        <div class="chip-float chip-float--verify">
+          <svg aria-hidden="true"><use href="#i-shield"></use></svg>
+          <span>Geprüfte Profile tragen ein Prüfzeichen</span>
+        </div>
+        <div class="chip-float chip-float--chat">
+          <svg aria-hidden="true"><use href="#i-video"></use></svg>
+          <span>„Wollen wir per Video gebärden?“</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ZIELGRUPPE ============ -->
+  <div class="marquee">
+    <div class="marquee__track" aria-hidden="true">
+      <div class="marquee__group">
+        <span class="marquee__item">gehörlos</span>
+        <span class="marquee__item">schwerhörig</span>
+        <span class="marquee__item">taubblind</span>
+        <span class="marquee__item">CODA</span>
+        <span class="marquee__item">Gebärdensprachdolmetscher*in</span>
+        <span class="marquee__item">spät ertaubt</span>
+      </div>
+      <div class="marquee__group">
+        <span class="marquee__item">gehörlos</span>
+        <span class="marquee__item">schwerhörig</span>
+        <span class="marquee__item">taubblind</span>
+        <span class="marquee__item">CODA</span>
+        <span class="marquee__item">Gebärdensprachdolmetscher*in</span>
+        <span class="marquee__item">spät ertaubt</span>
+      </div>
+    </div>
+    <p class="wrap" style="margin:0; position:absolute; left:-9999px;">Taubglück richtet sich an gehörlose, schwerhörige, taubblinde und spät ertaubte Menschen, an CODAs und an Gebärdensprachdolmetscher*innen.</p>
+  </div>
+
+  <!-- ============ GEBÄRDENSPRACHE ZUERST ============ -->
+  <section class="band" id="gebaerde">
+    <div class="wrap dgs">
+      <div>
+        <div class="shead">
+          <p class="eyebrow">Gebärdensprache zuerst</p>
+          <h2>Deine Sprache steht nicht im Kleingedruckten.</h2>
+        </div>
+        <p class="prose" style="margin-top:1.2rem;">Auf den meisten Websites ist Deutsch die Sprache und Gebärdensprache das Zusatzangebot. Hier ist es umgekehrt. Ein Klick auf <strong>DGS</strong> oben schaltet die Videos ein — probier es aus.</p>
+        <ul class="dgs__list">
+          <li>
+            <svg aria-hidden="true"><use href="#i-video"></use></svg>
+            <div><strong>Jeder Abschnitt als Video</strong><span>Was hier steht, gibt es auch gebärdet — nicht nur die Startseite, sondern auch AGB, Datenschutz und die häufigen Fragen.</span></div>
+          </li>
+          <li>
+            <svg aria-hidden="true"><use href="#i-caption"></use></svg>
+            <div><strong>Untertitel immer dabei</strong><span>Jedes Video hat Untertitel und einen Text zum Mitlesen. Auch für alle, die schwerhörig oder spät ertaubt sind.</span></div>
+          </li>
+          <li>
+            <svg aria-hidden="true"><use href="#i-eye"></use></svg>
+            <div><strong>Große Schrift, ruhige Bewegung</strong><span>Wer den ganzen Tag mit den Augen zuhört, braucht abends keine flackernde Seite.</span></div>
+          </li>
+          <li>
+            <svg aria-hidden="true"><use href="#i-ily"></use></svg>
+            <div><strong>Vorstellung in DGS <span class="proposal">Vorschlag</span></strong><span>Ein kurzes Gebärdenvideo im Profil würde mehr über einen Menschen sagen als jeder Steckbrief. Bisher nicht in der App.</span></div>
+          </li>
+      </ul>
+      </div>
+
+      <div class="video">
+        <span class="video__field" aria-hidden="true"></span>
+        <span class="video__hand" aria-hidden="true"><svg><use href="#i-ily"></use></svg></span>
+        <span class="video__note">Platzhalter — hier kommt das echte DGS-Video</span>
+        <button class="video__play" type="button" aria-label="DGS-Video abspielen: Was ist Taubglück?">
+          <svg aria-hidden="true"><use href="#i-play"></use></svg>
+        </button>
+        <p class="video__caption"><b>Untertitel</b>Taubglück ist für uns gemacht. Hier musst du dich nicht erklären.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ============ FUNKTIONEN ============ -->
+  <section class="band" id="app">
+    <div class="wrap">
+      <div class="dgs-panel">
+        <div class="dgs-panel__card">
+          <span class="dgs-panel__thumb" aria-hidden="true"><svg><use href="#i-play"></use></svg></span>
+          <span class="dgs-panel__t"><strong>Dieser Abschnitt in DGS</strong>Video: „Das kann die App“ · 1:12 Min · mit Untertiteln</span>
+        </div>
+      </div>
+      <div class="shead shead--wide">
+        <p class="eyebrow">Die App</p>
+        <h2>Suchen, schreiben, sehen, wer da war.</h2>
+      </div>
+
+      <div class="feat">
+        <div class="feat__item">
+          <svg class="feat__icon" aria-hidden="true"><use href="#i-people"></use></svg>
+          <h3>Stöbern statt wischen</h3>
+          <p>Alle Mitglieder in einem Raster — du schaust in Ruhe, so lange du willst. Niemand ist nach einem Wisch für immer weg.</p>
+        </div>
+        <div class="feat__item">
+          <svg class="feat__icon" aria-hidden="true"><use href="#i-filter"></use></svg>
+          <h3>Sortieren und filtern</h3>
+          <p>Nach Geschlecht, sexueller Orientierung, Herkunft, Religion und mehr. Du bestimmst, wer dir angezeigt wird.</p>
+        </div>
+        <div class="feat__item">
+          <svg class="feat__icon" aria-hidden="true"><use href="#i-chat"></use></svg>
+          <h3>Chat ohne Umwege</h3>
+          <p>Schreiben ist hier der Normalfall, kein Notbehelf. Kein Anruf, keine Sprachnachricht, keine Ausrede.</p>
+        </div>
+        <div class="feat__item">
+          <svg class="feat__icon" aria-hidden="true"><use href="#i-eye"></use></svg>
+          <h3>Jemand hat mich besucht</h3>
+          <p>Du siehst, wer auf deinem Profil war — auch wenn die Person noch zu schüchtern zum Schreiben war.</p>
+        </div>
+        <div class="feat__item">
+          <svg class="feat__icon" aria-hidden="true"><use href="#i-heart"></use></svg>
+          <h3>Favoriten und „Wer mag mich?“</h3>
+          <p>Zwei Listen, eine Frage weniger: wen du dir gemerkt hast — und wer sich dich gemerkt hat.</p>
+        </div>
+        <div class="feat__item">
+          <svg class="feat__icon" aria-hidden="true"><use href="#i-id"></use></svg>
+          <h3>Profile mit Charakter</h3>
+          <p>Identität, Gewohnheiten, „Ich suche“, Lieblingsessen, was du magst — und was gar nicht geht.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SICHERHEIT ============ -->
+  <section class="band safe" id="sicherheit">
+    <span class="safe__mark" aria-hidden="true"><svg viewBox="0 0 100 100"><use href="#i-ily"></use></svg></span>
+    <div class="wrap safe__in">
+      <div class="dgs-panel">
+        <div class="dgs-panel__card">
+          <span class="dgs-panel__thumb" aria-hidden="true"><svg><use href="#i-play"></use></svg></span>
+          <span class="dgs-panel__t"><strong>Dieser Abschnitt in DGS</strong>Video: „So prüfen wir jedes Profil“ · 0:58 Min · mit Untertiteln</span>
+        </div>
+      </div>
+      <div class="shead shead--wide">
+        <p class="eyebrow">Sicherheit</p>
+        <h2>Wer sich verifiziert hat, sieht man.</h2>
+        <p class="prose">Lade einmal deinen Ausweis hoch — dein Profil trägt danach das blaue Prüfzeichen. Und du erkennst beim Stöbern sofort, wer diesen Schritt auch gegangen ist.</p>
+      </div>
+
+      <ol class="steps">
+        <li>
+          <span class="steps__n">Schritt 1</span>
+          <h3>Ausweis hochladen</h3>
+          <p>In den Einstellungen unter <em>ID-Verifizierung</em>. Dauert zwei Minuten, einmalig.</p>
+        </li>
+        <li>
+          <span class="steps__n">Schritt 2</span>
+          <h3>Wir prüfen</h3>
+          <p>Wir gleichen Name, Alter und Foto ab. Der Ausweis wird nie Teil deines Profils.</p>
+        </li>
+        <li>
+          <span class="steps__n">Schritt 3</span>
+          <h3>Prüfzeichen am Profil</h3>
+          <p>Das blaue Zeichen begleitet dich überall in der App — im Raster, im Chat, auf deinem Profil.</p>
+        </li>
+      </ol>
+
+      <div class="safe__note">
+        <svg aria-hidden="true"><use href="#i-shield"></use></svg>
+        <p>Niemand sieht deinen Ausweis — nur das Prüfzeichen. Wer dich stört, landet mit einem Tippen unter <em>Blockierte Mitglieder</em>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DISKRETION ============ -->
+  <section class="band" id="diskretion">
+    <div class="wrap disc">
+      <div>
+        <div class="shead">
+          <p class="eyebrow">Diskretion</p>
+          <h2>Die Community ist klein. Deine Privatsphäre ist groß.</h2>
+        </div>
+        <p class="prose" style="margin-top:1.2rem;">In der Gehörlosen-Community kennt man sich. Das ist schön — beim Dating aber auch heikel. Wer sucht, will nicht, dass gleich der halbe Verein Bescheid weiß. Darum ist Taubglück von Anfang an auf Zurückhaltung gebaut, nicht auf Reichweite.</p>
+      </div>
+      <div class="disc__cards">
+        <div class="disc__card">
+          <svg aria-hidden="true"><use href="#i-eye-off"></use></svg>
+          <h3>Unsichtbar unterwegs</h3>
+          <p>Schau dich um, ohne Spuren zu hinterlassen. Du entscheidest, wann du sichtbar wirst.</p>
+        </div>
+        <div class="disc__card">
+          <svg aria-hidden="true"><use href="#i-block"></use></svg>
+          <h3>Bekannte ausblenden</h3>
+          <p>Bestimmte Profile sollen dich nie sehen? Blende sie aus — sie merken davon nichts.</p>
+        </div>
+        <div class="disc__card">
+          <svg aria-hidden="true"><use href="#i-id"></use></svg>
+          <h3>Fotos erst beim Match</h3>
+          <p>Deine Bilder bleiben unscharf, bis es auf beiden Seiten passt.</p>
+        </div>
+        <div class="disc__card">
+          <svg aria-hidden="true"><use href="#i-shield"></use></svg>
+          <h3>Jederzeit zurückziehen</h3>
+          <p>Profil pausieren oder ganz löschen — in zwei Schritten, ohne Nachfragen.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ============ FAQ ============ -->
+  <section class="band" id="faq">
+    <div class="wrap">
+      <div class="shead">
+        <p class="eyebrow">Häufige Fragen</p>
+        <h2>Kurz und klar.</h2>
+      </div>
+      <div class="faq">
+        <details open>
+          <summary>Für wen ist Taubglück?</summary>
+          <p>Für gehörlose, schwerhörige, taubblinde und spät ertaubte Menschen, für CODAs und für Gebärdensprachdolmetscher*innen. Ob du DGS gebärdest, LBG nutzt oder schreibst, spielt keine Rolle.</p>
+        </details>
+        <details>
+          <summary>Muss ich meinen Ausweis hochladen?</summary>
+          <p>Du musst nicht — aber es lohnt sich. Die ID-Verifizierung findest du in den Einstellungen unter „Sicherheit und Privatsphäre“. Danach trägt dein Profil das blaue Prüfzeichen. Andere sehen deinen Ausweis nie, nur das Zeichen.</p>
+        </details>
+        <details>
+          <summary>Brauche ich Ton oder ein Telefon?</summary>
+          <p>Nein. Die App kommt ohne Ton aus. Kein Anruf, keine Sprachnachricht, keine Bestätigung per Telefon.</p>
+        </details>
+        <details>
+          <summary>Was kostet Taubglück?</summary>
+          <p>Ein Profil anzulegen kostet nichts. Für einige Funktionen gibt es ein Abo — die aktuellen Preise stehen in der App unter „Einstellung → Abonnieren“.</p>
+        </details>
+        <details>
+          <summary>Was passiert, wenn mich jemand belästigt?</summary>
+          <p>Blockiere die Person direkt im Profil und melde sie uns. Wir prüfen jede Meldung. Wen du blockiert hast, siehst du in den Einstellungen unter „Blockierte Mitglieder“ — und kannst es jederzeit rückgängig machen.</p>
+        </details>
+        <details>
+          <summary>Wo bekomme ich die App?</summary>
+          <p>Im App&nbsp;Store und bei Google&nbsp;Play. Suche dort nach <em>Taubglück</em>.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SCHLUSS ============ -->
+  <section class="band close" id="laden">
+    <div class="wrap close__in">
+      <h2>Hier musst du dich nicht erklären.</h2>
+      <p>Lade Taubglück und schau dich in Ruhe um. Ein Foto und ein paar Sätze reichen für den Anfang — das Prüfzeichen holst du dir später.</p>
+      <div class="stores">
+        <a class="store" href="#laden">
+          <svg aria-hidden="true"><use href="#i-apple"></use></svg>
+          <span class="store__t"><small>Laden im</small><span>App&nbsp;Store</span></span>
+        </a>
+        <a class="store" href="#laden">
+          <svg aria-hidden="true"><use href="#i-play-store"></use></svg>
+          <span class="store__t"><small>Jetzt bei</small><span>Google&nbsp;Play</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap band" style="padding-block:clamp(3rem,6vw,4.5rem) 0;">
+    <div class="foot__in">
+      <div class="foot__brand">
+        <a class="brand" href="#top">
+          <svg class="brand__mark" aria-hidden="true"><use href="#i-ily"></use></svg>
+          Taubglück
+        </a>
+        <p>Die Dating-App für die gehörlose, schwerhörige und taubblinde Community in Deutschland.</p>
+      </div>
+      <div>
+        <h4>Rechtliches</h4>
+        <ul>
+          <li><a href="#">AGB</a></li>
+          <li><a href="#">Datenschutz</a></li>
+          <li><a href="#">EULA</a></li>
+          <li><a href="#">Impressum</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <ul>
+          <li><a href="#faq">Häufige Fragen</a></li>
+          <li><a href="#">Support per E-Mail</a></li>
+          <li><a href="#">Support per DGS-Video</a></li>
+          <li><a class="social" href="#"><svg aria-hidden="true"><use href="#i-instagram"></use></svg>Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot__bottom">
+      <span>© 2026 Taubglück</span>
+      <span>Designkonzept — Inhalte sind Entwürfe.</span>
+    </div>
+  </div>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  var btn = document.querySelector('[data-dgs]');
+  if(!btn) return;
+  btn.addEventListener('click', function(){
+    var on = document.body.classList.toggle('dgs-on');
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    if(on){
+      var first = document.querySelector('.dgs-panel');
+      if(first) first.scrollIntoView({behavior:'smooth', block:'center'});
+    }
+  });
+})();
+</script>
+<!--BODY:END-->
+</body>
+</html>
