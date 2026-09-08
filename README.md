@@ -52,79 +52,99 @@ Weitere tragende Entscheidungen:
 - **Identität statt Defizit.** „gehörlos“, „taub“, „CODA“ — keine Hörgeräte-Bildsprache,
   kein Mitleid.
 - **Ruhige Bewegung, große Schrift.** Wer den ganzen Tag mit den Augen zuhört, ermüdet an
-  einer flackernden Seite. Grundschriftgrad 19 px, `prefers-reduced-motion` respektiert.
+  einer flackernden Seite. Grundschriftgrad 17 px, Lead-Text 19 px, `prefers-reduced-motion`
+  respektiert.
 
 ## Gestaltung
 
-Die Seite folgt einem **editorialen Drei-Flächen-System**: jede Seite läuft durch drei
-Flächen und löst sich am Ende in einer dunklen auf. Übernommen ist die Ordnung, nicht die
-Farbe — im Original trägt der Kopf ein tiefes Indigo. Hier trägt ihn das Markengelb, weil
-Gelb die Primärfarbe der Marke ist und bleibt.
+Die vorige Fassung folgte einem editorialen Drei-Flaechen-System: harte Farbbloecke,
+1-px-Haarlinien als Trennung, 8-px-Radien, gedraengte Zeilenabstaende. Dieses Regelwerk
+ist bewusst aufgegeben. Die Seite folgt jetzt einem eigenen System.
 
-| Fläche | Farbe | Rolle |
+**Weiches Licht.**
+
+Videos in Deutscher Gebaerdensprache werden weich ausgeleuchtet: eine grosse, diffuse
+Quelle, keine harten Schatten, kein Glanz, damit die Haende jederzeit klar vor dem Koerper
+stehen. Diese Ausleuchtung ist das Gestaltungsprinzip der Seite. Wer den ganzen Tag mit den
+Augen zuhoert, soll auf eine Seite ohne Kanten und ohne Blendung schauen.
+
+Daraus folgen drei Regeln, die alles andere bestimmen:
+
+1. **Kein einziger Rahmen.** Auf der ganzen Seite gibt es keine `border`-Linie als
+   Trennung. Flaechen setzen sich durch Licht und weichen Schatten voneinander ab.
+2. **Alles ist eine Platte.** Abschnitte sind gerundete Flaechen, die auf dem Papier
+   liegen, nicht Baender, die bis an den Bildschirmrand stossen. Nichts hat eine Ecke
+   unter 10 px, Grossflaechen tragen 46 px.
+3. **Eine Lichtquelle.** Das Licht kommt von oben, im Kopf von hinten rechts, wo das
+   Telefon steht. Jede Platte traegt denselben Verlauf und denselben Innenglanz, damit
+   die Seite wie ein Raum wirkt und nicht wie ein Stapel Kacheln.
+
+### Farben
+
+Gelb bleibt die Primaerfarbe, ist aber keine Flaeche mehr, sondern Licht: es faechert sich
+in vier Stufen vom fast weissen Schein bis zum vollen Markengelb.
+
+| Rolle | Wert | |
 |---|---|---|
-| 1 — Kopf | `#FFC21A` Markengelb | Der Auftritt. Tinte dunkel, nie weiß. |
-| 2 — Rumpf | `#FFFFFF` / `#FAFAF8` | Der Inhalt. Abschnitte wechseln zwischen Weiß und einem kaum getönten Off-White. |
-| 3 — Schluss | `#0E3030` tiefes Teal | Der Schlussakkord. Bricht die Gelb/Weiß-Folge auf. |
+| Papier | `#F4F6F1` | Der Grund. Ein Neutral, minimal ins Gruen gezogen, also in Richtung des Akzents, statt reinem Grau |
+| Platte | `#FFFFFF` | Alles, was Licht abbekommt |
+| Senke | `#EAEFE7` | Die zurueckgesetzten Abschnitte |
+| Markengelb | `#F0B31F` | Der Kern der Lichtfamilie |
+| Honig / Schein | `#FFDC8E` / `#FFF5DC` | Die Streuung nach aussen |
+| Tiefe | `#10322D` | Schlussakkord und die Semantik "geprueft" |
+| Tinte | `#232624` | Warmes Gruenschwarz, nie reines Schwarz |
 
-Teal ist die einzige Farbe außer Gelb. Sie schließt nicht nur die Seite ab, sondern trägt
-auch die Semantik „geprüft“ im Rumpf — so bleibt das System bei zwei Farben plus warmen
-Grautönen. Ein vierter Farbton würde die Ordnung brechen.
+Schatten sind nie schwarz, sondern warm getoent (`rgba(38,46,36,…)`) und dreifach gestuft.
+Ein reiner Schwarzschatten wirkt auf hellem Papier wie Schmutz.
 
-**Weitere Regeln des Systems**
+### Schrift
 
 | | |
 |---|---|
-| Tinte | `#292827` — warmes Dunkelgrau, nie reines Schwarz |
-| Schrift | Inter Variable in **Zwischengewichten** 460 / 540 / 600 statt 400 / 500 / 700 |
-| Zeilenabstand | 0.96 auf Displaygrößen — editoriale Verdichtung |
-| Laufweite | negativ auf Displaygrößen, bis −0.0275 em |
-| Radien | 8 px Rechteck für Schaltflächen, 12 px für Karten, 6 px für Felder |
-| Pillen | ausschließlich im Kopf — im Rumpf gibt es keine Pillen-Buttons |
-| Aktionen | eine Aktion pro Fläche; die Seite drängelt nicht |
-| Abstände | 8-px-Basis, 64–96 px zwischen Abschnitten, bis 128 px im Schlussband |
-| Container | 1100 px, Lesetext auf 62 Zeichen |
+| Display | **Hanken Grotesk** 340/360, sehr gross gesetzt. Eine weiche humanistische Grotesk mit runden Punzen, die die gerundeten Balken des ILY-Zeichens aufnimmt. Leichte Schnitte in grossem Grad lesen sich luftig, nicht duenn |
+| Text und Bedienung | **Inter** 420/560 |
+| Grundschriftgrad | 17 px, Lead-Text 19 px |
+| Zeilenabstand | 1.6 im Text, 1.03 im Display. Die vorige Fassung verdichtete auf 0.96; das ist editorial richtig und fuer diese Zielgruppe zu eng |
+| Laufweite | −0.028 em im Display, im Text nahe null |
 
-Der Kopf ist in **zwei Hälften bis an den Rand** geteilt: links das Markengelb mit
-Schlagzeile, einer Aktion und einer Zeilenliste der vier App-Bereiche, rechts die
-Produktaufnahme auf einem warmen Verlauf, unten angeschnitten. Die Kopfleiste bleibt weiß
-und sitzt über beiden Hälften.
+### Aufbau
 
-Der Abschnitt „Die App“ läuft als **Bento-Raster**: eine breite Karte, darunter zwei
-mittlere, jede mit Label, Aussage und einem von der Kartenkante beschnittenen Produktbild.
-Die Sicherheitskarten tragen **Verlaufskacheln** statt Nummern. Der Gebärdenraum ist
-bewusst **quadratisch und groß** — die Videofläche ist der Ort, an dem die Sprache der
-Zielgruppe stattfindet, und darf nicht die kleinste Fläche der Seite sein.
+Der Kopf ist keine geteilte Flaeche mehr, sondern **eine grosse Platte** mit einem
+durchgehenden Lichtverlauf. Links steht die Schlagzeile, rechts das Produkt im hellsten
+Punkt des Verlaufs, unten von der Plattenkante angeschnitten. Die Kopfleiste schwebt als
+Pille mit Milchglas darueber und bleibt beim Scrollen stehen.
 
-### Anti-Slop-Pruefung
+Die vier App-Bereiche liegen darunter auf **einer** hellen Platte, nicht auf vier Karten.
+Das Laufband mit den Zielgruppen laeuft ohne Rahmen und verlaeuft an beiden Enden ins
+Papier. Der Gebaerdenraum ist weiterhin quadratisch und die groesste Flaeche seines
+Abschnitts. Die haeufigen Fragen sind von einer linierten Liste zu einzelnen weichen
+Flaechen geworden.
 
-Die Seite wurde zusaetzlich gegen ein Anti-Slop-Frontend-Regelwerk geprueft. Sechs Punkte
-fielen durch und wurden behoben:
+### Was von der Anti-Slop-Pruefung bleibt
 
-| Befund | Vorher | Jetzt |
-|---|---|---|
-| Gedankenstriche | 33 Stueck | 0. Saetze umgebaut, nicht nur Zeichen getauscht |
-| Nachgebaute Oberflaechen | Telefon und drei Karten aus div-Elementen | 4 echte Screenshots der App |
-| Eyebrow-Marken | 6 bei 8 Abschnitten | 3, der erlaubte Hoechstwert |
-| Handgezeichnete Symbole | 18 | 17 aus Phosphor, nur der Markenknoten bleibt eigen |
-| Drei gleiche Karten nebeneinander | 4 Raster | 0, alles asymmetrisch |
-| Zierpunkte im Laufband | 1 | 0, jetzt Haarlinien |
+Die inhaltlichen Befunde der vorigen Pruefung sind weiter erfuellt: keine Gedankenstriche
+im Seitentext, echte Screenshots statt nachgebauter Oberflaechen, drei Eyebrow-Marken,
+Icons aus Phosphor bis auf den Markenknoten, keine drei gleichen Karten nebeneinander.
+
+Eine formale Vorgabe ist bewusst zurueckgenommen: im Laufband stehen wieder Punkte statt
+Haarlinien. Das neue System kennt keine Linien, und ein kleiner Lichtpunkt ist hier das
+systemtreue Trennzeichen.
 
 **Design Read:** Konsumenten-Lending fuer eine Dating-App, Redesign mit Markenerhalt,
 Zielgruppe gehoerlose und schwerhoerige Menschen, Sprache aus Vertrauen und
-Zugaenglichkeit. Regler: Varianz 6, Bewegung 3, Dichte 4. Die Bewegung liegt bewusst
-niedrig, weil die Zielgruppe den ganzen Tag mit den Augen zuhoert.
+Zugaenglichkeit. Regler: Varianz 6, Bewegung 2, Dichte 3. Bewegung und Dichte liegen
+niedriger als zuvor, weil die Zielgruppe den ganzen Tag mit den Augen zuhoert.
 
 ### Bewusste Abweichungen
 
-Vier Stellen weichen ab, alle begruendet statt versteckt:
-
 1. **Kein Dunkelmodus.** Das Regelwerk verlangt beide Modi, erlaubt aber die Ausnahme bei
-   ausdruecklicher Ansage. Die gab es.
-2. **Inter als Schrift.** Als Standard eigentlich unerwuenscht, hier durch zwei
-   Ausnahmen gedeckt: barrierefreier Auftrag und das vorgegebene Designsystem. Fuer diese
-   Zielgruppe waere **Atkinson Hyperlegible** trotzdem die bessere Fliesstextschrift. Eine
-   Zeile in `--ff`. Empfehlung, keine Entscheidung.
+   ausdruecklicher Ansage. Die gab es. Die Seite ist eine einzige, bewusst helle Welt und
+   malt Grund und Farben ausdruecklich, damit sie in jeder Umgebung haelt.
+2. **Inter bleibt im Text.** Als Standardschrift eigentlich unerwuenscht, hier durch den
+   barrierefreien Auftrag gedeckt und auf Text und Bedienung begrenzt; die Display-Ebene
+   traegt jetzt Hanken Grotesk. Fuer diese Zielgruppe waere **Atkinson Hyperlegible**
+   trotzdem die bessere Fliesstextschrift. Eine Zeile in `--ff`. Empfehlung, keine
+   Entscheidung.
 3. **Handgezeichneter Markenknoten.** Handgemachte SVG sind verboten, ein einfaches
    Markenzeichen ist die Ausnahme, und ein Redesign aendert das Logo ohnehin nie still.
 4. **Zwei Aktionen im Schlussband.** Eine App braucht beide Stores. Im Kopf bleibt es bei
