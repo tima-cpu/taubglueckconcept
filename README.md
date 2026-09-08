@@ -56,36 +56,51 @@ Weitere tragende Entscheidungen:
 
 ## Gestaltung
 
-**Farbe** — helles warmes Papier, Markengelb als einziger lauter Akzent.
+Die Seite folgt einem **editorialen Drei-Flächen-System**: jede Seite läuft durch drei
+Flächen und löst sich am Ende in einer dunklen auf. Übernommen ist die Ordnung, nicht die
+Farbe — im Original trägt der Kopf ein tiefes Indigo. Hier trägt ihn das Markengelb, weil
+Gelb die Primärfarbe der Marke ist und bleibt.
 
-| Token | Wert | Rolle |
+| Fläche | Farbe | Rolle |
 |---|---|---|
-| `--bg` | `#FAF8F4` | warmes Papier, Grundfläche |
-| `--bg-2` | `#FFFFFF` | erhobene Flächen und Bänder |
-| `--gold` | `#FFC21A` | Markengelb (aus dem Bestand übernommen) |
-| `--fg` | `#191512` | Fließtext |
-| `--gold-text` | `#6E4B00` | tiefes Gold für Labels |
-| `--verify` | `#147054` | Semantik: geprüft |
+| 1 — Kopf | `#FFC21A` Markengelb | Der Auftritt. Tinte dunkel, nie weiß. |
+| 2 — Rumpf | `#FFFFFF` / `#FAFAF8` | Der Inhalt. Abschnitte wechseln zwischen Weiß und einem kaum getönten Off-White. |
+| 3 — Schluss | `#0E3030` tiefes Teal | Der Schlussakkord. Bricht die Gelb/Weiß-Folge auf. |
 
-**Gelb ist eine Fläche, keine Textfarbe.** Auf hellem Grund wird Gelb als Text schnell
-matschig. Es trägt hier deshalb Blöcke: den Marker hinter „Blickkontakt“, die Buttons, das
-Logo-Plättchen, den DGS-Schalter im aktiven Zustand, das Schlussband. Text und Symbole
-bleiben tiefschwarz — genau das Verhältnis, das die Marke ohnehin schon nutzt.
+Teal ist die einzige Farbe außer Gelb. Sie schließt nicht nur die Seite ab, sondern trägt
+auch die Semantik „geprüft“ im Rumpf — so bleibt das System bei zwei Farben plus warmen
+Grautönen. Ein vierter Farbton würde die Ordnung brechen.
 
-Die Seite ist bewusst **einthemig hell**: kein Dunkelmodus, alle Farben explizit gesetzt.
-Sie sieht damit für alle gleich aus, unabhängig von der Systemeinstellung.
+**Weitere Regeln des Systems**
 
-**Schrift**
+| | |
+|---|---|
+| Tinte | `#292827` — warmes Dunkelgrau, nie reines Schwarz |
+| Schrift | Inter Variable in **Zwischengewichten** 460 / 540 / 600 statt 400 / 500 / 700 |
+| Zeilenabstand | 0.96 auf Displaygrößen — editoriale Verdichtung |
+| Laufweite | negativ auf Displaygrößen, bis −0.0275 em |
+| Radien | 8 px Rechteck für Schaltflächen, 12 px für Karten, 6 px für Felder |
+| Pillen | ausschließlich im Kopf — im Rumpf gibt es keine Pillen-Buttons |
+| Aktionen | eine Aktion pro Fläche; die Seite drängelt nicht |
+| Abstände | 8-px-Basis, 64–96 px zwischen Abschnitten, bis 128 px im Schlussband |
+| Container | 1100 px, Lesetext auf 62 Zeichen |
 
-- *Bricolage Grotesque* — Display, warm und eigenwillig
-- *Atkinson Hyperlegible* — Fließtext. Vom Braille Institute für maximale Lesbarkeit
-  entwickelt; verwechselbare Buchstaben sind bewusst unterscheidbar gezeichnet. Für ein
-  Produkt, das Barrierefreiheit zum Thema hat, die naheliegende Wahl.
-- *DM Mono* — Labels und Auszeichnungen
+Der Kopf nutzt das **angeschnittene Motiv** des Systems: Statt einer Porträtaufnahme läuft
+das Gerät mit der echten Rasteransicht unten aus der gelben Fläche heraus. Die Tiefe
+kommt wie im Original aus einem atmosphärischen Verlauf — hier warme Gelbtöne statt
+Violett-Himmel.
 
-**Layout** — „Sichtachsen“: breite Bänder, freie Blickfelder, viel Luft. Angelehnt an
-DeafSpace, die Architekturprinzipien der Gallaudet University: klare Sichtlinien, nichts
-verstellt den Blick.
+### Abweichung vom System
+
+Zwei Stellen weichen bewusst ab, beide notiert statt versteckt:
+
+1. **Zwei Aktionen im Schlussband.** Das System erlaubt eine. Eine App braucht aber beide
+   Stores; ein Umweg über eine Zwischenseite kostet Installationen. Im Kopf bleibt es bei
+   einer Aktion, die Store-Links stehen dort nur als Textlinks darunter.
+2. **Schrift.** Das System schreibt Inter vor, und die Seite nutzt Inter. Für diese
+   Zielgruppe wäre **Atkinson Hyperlegible** die bessere Fließtextschrift — vom Braille
+   Institute für maximale Lesbarkeit gezeichnet, verwechselbare Buchstaben bewusst
+   unterscheidbar. Der Tausch ist eine Zeile in `--ff`. Empfehlung, keine Entscheidung.
 
 ## Zum Markenzeichen
 
