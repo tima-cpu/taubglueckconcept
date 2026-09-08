@@ -96,17 +96,46 @@ Die Sicherheitskarten tragen **Verlaufskacheln** statt Nummern. Der Gebärdenrau
 bewusst **quadratisch und groß** — die Videofläche ist der Ort, an dem die Sprache der
 Zielgruppe stattfindet, und darf nicht die kleinste Fläche der Seite sein.
 
-### Abweichung vom System
+### Anti-Slop-Pruefung
 
-Zwei Stellen weichen bewusst ab, beide notiert statt versteckt:
+Die Seite wurde zusaetzlich gegen ein Anti-Slop-Frontend-Regelwerk geprueft. Sechs Punkte
+fielen durch und wurden behoben:
 
-1. **Zwei Aktionen im Schlussband.** Das System erlaubt eine. Eine App braucht aber beide
-   Stores; ein Umweg über eine Zwischenseite kostet Installationen. Im Kopf bleibt es bei
-   einer Aktion, die Store-Links stehen dort nur als Textlinks darunter.
-2. **Schrift.** Das System schreibt Inter vor, und die Seite nutzt Inter. Für diese
-   Zielgruppe wäre **Atkinson Hyperlegible** die bessere Fließtextschrift — vom Braille
-   Institute für maximale Lesbarkeit gezeichnet, verwechselbare Buchstaben bewusst
-   unterscheidbar. Der Tausch ist eine Zeile in `--ff`. Empfehlung, keine Entscheidung.
+| Befund | Vorher | Jetzt |
+|---|---|---|
+| Gedankenstriche | 33 Stueck | 0. Saetze umgebaut, nicht nur Zeichen getauscht |
+| Nachgebaute Oberflaechen | Telefon und drei Karten aus div-Elementen | 4 echte Screenshots der App |
+| Eyebrow-Marken | 6 bei 8 Abschnitten | 3, der erlaubte Hoechstwert |
+| Handgezeichnete Symbole | 18 | 17 aus Phosphor, nur der Markenknoten bleibt eigen |
+| Drei gleiche Karten nebeneinander | 4 Raster | 0, alles asymmetrisch |
+| Zierpunkte im Laufband | 1 | 0, jetzt Haarlinien |
+
+**Design Read:** Konsumenten-Lending fuer eine Dating-App, Redesign mit Markenerhalt,
+Zielgruppe gehoerlose und schwerhoerige Menschen, Sprache aus Vertrauen und
+Zugaenglichkeit. Regler: Varianz 6, Bewegung 3, Dichte 4. Die Bewegung liegt bewusst
+niedrig, weil die Zielgruppe den ganzen Tag mit den Augen zuhoert.
+
+### Bewusste Abweichungen
+
+Vier Stellen weichen ab, alle begruendet statt versteckt:
+
+1. **Kein Dunkelmodus.** Das Regelwerk verlangt beide Modi, erlaubt aber die Ausnahme bei
+   ausdruecklicher Ansage. Die gab es.
+2. **Inter als Schrift.** Als Standard eigentlich unerwuenscht, hier durch zwei
+   Ausnahmen gedeckt: barrierefreier Auftrag und das vorgegebene Designsystem. Fuer diese
+   Zielgruppe waere **Atkinson Hyperlegible** trotzdem die bessere Fliesstextschrift. Eine
+   Zeile in `--ff`. Empfehlung, keine Entscheidung.
+3. **Handgezeichneter Markenknoten.** Handgemachte SVG sind verboten, ein einfaches
+   Markenzeichen ist die Ausnahme, und ein Redesign aendert das Logo ohnehin nie still.
+4. **Zwei Aktionen im Schlussband.** Eine App braucht beide Stores. Im Kopf bleibt es bei
+   einer Aktion.
+
+### Zu den Screenshots
+
+Die Aufnahmen stammen aus der ausgelieferten App. Sie zeigen **echte Mitglieder einer
+kleinen Community**, deshalb sind Gesichter und Profilfotos unkenntlich gemacht, waehrend
+die Bedienoberflaeche scharf bleibt. Fuer einen Livegang braucht es freigegebene
+Marketing-Aufnahmen oder Einverstaendniserklaerungen der abgebildeten Personen.
 
 ## Zum Markenzeichen
 
