@@ -138,73 +138,94 @@ a{ color:inherit; }
 .linkline{ display:inline-flex; gap:1.25rem; flex-wrap:wrap; }
 .linkline a{ text-decoration:underline; text-underline-offset:3px; text-decoration-thickness:1px; }
 
-/* ---------- Kopfleiste ---------- */
-.nav{ background:var(--brand); color:var(--on-brand); }
+/* ---------- Kopfleiste: hell, ueber der Farbflaeche ---------- */
+.nav{ background:var(--canvas); color:var(--ink); border-bottom:1px solid var(--hairline); }
 .nav__in{ display:flex; align-items:center; gap:1.5rem; padding-block:16px; }
 .brand{ display:flex; align-items:center; gap:.6rem; text-decoration:none; font-size:1.125rem; font-weight:600; letter-spacing:-.02em; }
 .brand__mark{ width:32px; height:32px; padding:4px; flex:none; display:block; background:var(--on-brand); color:var(--brand); border-radius:var(--r-md); }
 .nav__links{ display:flex; gap:1.75rem; margin-left:auto; }
 .nav__links a{ text-decoration:none; font-size:1rem; font-weight:460; padding-block:.25rem; border-bottom:1.5px solid transparent; }
-.nav__links a:hover{ border-bottom-color:var(--on-brand); }
+.nav__links a:hover{ border-bottom-color:var(--ink); }
 .nav__act{ display:flex; align-items:center; gap:.75rem; }
 @media (max-width:960px){ .nav__links{ display:none; } }
 
 .dgs-toggle{
   display:inline-flex; align-items:center; gap:.5rem;
-  background:transparent; color:var(--on-brand);
-  border:1.5px solid rgba(36,28,8,.32); border-radius:var(--r-md);
+  background:var(--canvas); color:var(--ink);
+  border:1.5px solid var(--hairline); border-radius:var(--r-md);
   padding:11px 14px; min-height:46px; cursor:pointer;
   font-family:var(--ff); font-size:.875rem; font-weight:600; line-height:1;
 }
-.dgs-toggle:hover{ border-color:var(--on-brand); }
-.dgs-toggle[aria-pressed="true"]{ background:var(--on-brand); color:var(--brand); border-color:var(--on-brand); }
+.dgs-toggle:hover{ border-color:var(--ink); }
+.dgs-toggle[aria-pressed="true"]{ background:var(--brand); color:var(--on-brand); border-color:var(--brand); }
 .dgs-toggle svg{ width:17px; height:17px; }
 
-/* ---------- Kopf: Flaeche 1, Markengelb ---------- */
-.hero{ position:relative; background:var(--brand); color:var(--on-brand); overflow:hidden; }
-/* atmosphaerischer Verlauf — das Tiefenmittel des Systems */
-.hero__air{
-  position:absolute; inset:0; pointer-events:none;
-  background:
-    radial-gradient(78% 62% at 78% 12%, var(--brand-veil) 0%, rgba(255,236,171,0) 62%),
-    radial-gradient(60% 55% at 12% 92%, var(--brand-lift) 0%, rgba(255,215,94,0) 58%),
-    linear-gradient(180deg, rgba(255,255,255,.16) 0%, rgba(231,168,0,.20) 100%);
-}
-.hero__in{
-  position:relative; display:grid; gap:clamp(2rem,4vw,3rem);
-  grid-template-columns:1fr; align-items:end;
-  padding-top:clamp(3rem,6vw,5rem);
-}
-@media (min-width:940px){ .hero__in{ grid-template-columns:1.02fr .98fr; } }
+/* ---------- Kopf: zwei Haelften bis an den Rand ---------- */
+.hero{ display:grid; grid-template-columns:1fr; background:var(--brand); color:var(--on-brand); }
+@media (min-width:1000px){ .hero{ grid-template-columns:1fr 1fr; } }
 
-.hero__copy{ display:flex; flex-direction:column; align-items:flex-start; gap:1.5rem; padding-bottom:clamp(3rem,6vw,5.5rem); }
+.hero__left{
+  display:flex; flex-direction:column; justify-content:center; gap:clamp(2rem,4vw,3.25rem);
+  padding-block:clamp(3rem,6vw,5.5rem);
+  padding-inline:max(var(--pad), calc((100vw - var(--shell))/2 + var(--pad))) clamp(1.5rem,4vw,3.5rem);
+}
+@media (max-width:999px){ .hero__left{ padding-inline:var(--pad); } }
+
+.hero__head{ display:flex; flex-direction:column; align-items:flex-start; gap:1.5rem; }
 .hero__eyebrow{ display:inline-flex; align-items:center; gap:.5rem; background:rgba(36,28,8,.10); border-radius:var(--r-full); padding:6px 14px; font-size:.75rem; font-weight:540; }
-.hero__lede{ max-width:46ch; color:rgba(36,28,8,.82); }
-.hero__cta{ display:flex; flex-direction:column; gap:.9rem; align-items:flex-start; }
+.hero__lede{ max-width:44ch; color:rgba(36,28,8,.82); }
+.hero__act{ display:flex; align-items:center; gap:1.25rem; flex-wrap:wrap; }
+.hero__more{ font-weight:600; text-decoration:none; display:inline-flex; align-items:center; gap:.35rem; }
+.hero__more:hover{ text-decoration:underline; text-underline-offset:3px; }
+.hero__more svg{ width:14px; height:14px; }
 
-.trust{ display:flex; flex-wrap:wrap; gap:.5rem 1.5rem; list-style:none; margin:0; padding:0; }
-.trust li{ display:flex; align-items:center; gap:.5rem; font-size:.875rem; font-weight:540; color:rgba(36,28,8,.84); }
-.trust svg{ width:16px; height:16px; flex:none; }
+/* Zeilenliste — die vier Bereiche der App */
+.toolkit__t{ font-size:.9375rem; font-weight:600; margin-bottom:.25rem; }
+.toolkit ul{ list-style:none; margin:0; padding:0; }
+.toolkit li{
+  display:grid; grid-template-columns:26px 8.5rem 1fr; align-items:center; gap:1rem;
+  padding-block:14px; border-top:1px solid rgba(36,28,8,.20);
+}
+.toolkit li:last-child{ border-bottom:1px solid rgba(36,28,8,.20); }
+.toolkit svg{ width:20px; height:20px; }
+.toolkit b{ font-weight:600; }
+.toolkit span{ color:rgba(36,28,8,.72); font-size:.9375rem; }
+@media (max-width:560px){
+  .toolkit li{ grid-template-columns:26px 1fr; row-gap:.15rem; }
+  .toolkit span{ grid-column:2; }
+}
 
-/* halb angeschnittenes Motiv: das Geraet laeuft unten aus dem Kopf heraus */
-.hero__device{ position:relative; display:flex; justify-content:center; align-items:flex-end; }
-.hero__device .phone{ margin-bottom:-56px; }
+/* Rechte Haelfte: Produktaufnahme auf warmem Verlauf, angeschnitten */
+.hero__right{
+  position:relative; overflow:hidden; min-height:clamp(340px, 52vw, 620px);
+  display:flex; align-items:flex-end; justify-content:center;
+  background:
+    radial-gradient(70% 60% at 64% 14%, #FFE9A8 0%, rgba(255,233,168,0) 60%),
+    radial-gradient(76% 70% at 82% 86%, #E88F12 0%, rgba(232,143,18,0) 66%),
+    linear-gradient(158deg, #FFCE45 0%, #E9A005 100%);
+}
+.hero__right .phone{ margin-bottom:-8%; width:min(378px, 66%); }
 .hero__tag{
-  position:absolute; bottom:6rem; left:0; display:flex; align-items:center; gap:.6rem;
+  position:absolute; left:clamp(1rem,4%,3rem); bottom:22%;
+  display:flex; align-items:center; gap:.6rem;
   background:var(--canvas); color:var(--ink); border-radius:var(--r-lg);
-  padding:12px 16px; box-shadow:var(--lift-2); max-width:232px; font-size:.875rem; font-weight:460;
+  padding:12px 16px; box-shadow:var(--lift-2); max-width:224px; font-size:.875rem;
 }
-.hero__tag svg{ width:18px; height:18px; color:var(--verify); flex:none; }
-@media (max-width:1080px){ .hero__tag{ left:-.75rem; bottom:5rem; } }
-@media (max-width:640px){ .hero__tag{ display:none; } }
+.hero__tag svg{ width:18px; height:18px; color:var(--teal-mid); flex:none; }
+@media (max-width:700px){ .hero__tag{ display:none; } }
 
-/* ---------- Zielgruppe als Reiter ---------- */
-.tabs{ display:flex; flex-wrap:wrap; gap:.5rem; list-style:none; margin:0; padding:0; }
-.tabs li{
-  background:var(--canvas); color:var(--ink); border:1px solid var(--hairline);
-  border-radius:var(--r-full); padding:8px 16px; font-size:.875rem; font-weight:600;
+/* ---------- Zielgruppe: Laufband ---------- */
+.marquee{ border-block:1px solid var(--hairline); background:var(--canvas-soft); overflow:hidden; padding-block:1.15rem; }
+.marquee__track{ display:flex; width:max-content; animation:slide 46s linear infinite; }
+.marquee__group{ display:flex; }
+.marquee__item{
+  display:inline-flex; align-items:center; gap:1.9rem; padding-inline:.95rem;
+  font-size:clamp(1.05rem,2vw,1.5rem); font-weight:540; letter-spacing:-.02em;
+  color:var(--ink); white-space:nowrap;
 }
-.tabs li:first-child{ background:var(--brand); border-color:var(--brand); color:var(--on-brand); }
+.marquee__item::after{ content:""; width:7px; height:7px; border-radius:50%; background:var(--brand); }
+@keyframes slide{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+@media (prefers-reduced-motion: reduce){ .marquee__track{ width:100%; flex-wrap:wrap; } }
 
 /* ---------- Abschnittskopf ---------- */
 .shead{ display:flex; flex-direction:column; gap:1rem; max-width:46ch; }
@@ -215,24 +236,71 @@ a{ color:inherit; }
 @media (min-width:720px){ .rows{ grid-template-columns:repeat(2,1fr); } }
 @media (min-width:1000px){ .rows{ grid-template-columns:repeat(3,1fr); } }
 .row-card{
-  background:var(--canvas-soft); border:1px solid var(--hairline); border-radius:var(--r-md);
+  background:var(--canvas-soft); border:1px solid var(--hairline); border-radius:var(--r-lg);
   padding:24px; display:flex; flex-direction:column; gap:.6rem;
 }
 .band--soft .row-card{ background:var(--canvas); }
 .row-card svg{ width:24px; height:24px; color:var(--ink); }
 .row-card p{ color:var(--ink-mute); font-size:1rem; }
 
-.card{
-  background:var(--canvas); border:1px solid var(--hairline);
-  border-radius:var(--r-lg); padding:32px;
+.card{ background:var(--canvas); border:1px solid var(--hairline); border-radius:var(--r-lg); padding:32px; }
+
+/* Zentrierter Abschnittskopf */
+.centered{ display:flex; flex-direction:column; align-items:center; text-align:center; gap:1.25rem; max-width:60ch; margin-inline:auto; }
+.centered .measure, .centered p{ max-width:56ch; }
+
+/* Bento — ungleich grosse Karten, jede mit Label, Aussage und Produktbild */
+.bento{ display:grid; gap:1rem; margin-top:3rem; grid-template-columns:1fr; }
+@media (min-width:900px){ .bento{ grid-template-columns:1fr 1fr; } .bento__wide{ grid-column:1 / -1; } }
+.bento__card{
+  position:relative; overflow:hidden; border-radius:var(--r-xl); min-height:390px;
+  display:grid; gap:0; grid-template-columns:1fr; align-content:start;
 }
+@media (min-width:900px){ .bento__wide{ grid-template-columns:.86fr 1.14fr; align-items:center; min-height:340px; } }
+.bento__text{ padding:32px; display:flex; flex-direction:column; gap:.6rem; align-self:center; }
+.bento__label{ font-size:.875rem; font-weight:540; opacity:.72; }
+.bento__card h3{ font-size:clamp(1.35rem,1.9vw,1.75rem); font-weight:540; line-height:1.14; letter-spacing:-.0225em; margin:0; }
+.bento__art{ position:relative; min-height:210px; display:flex; align-items:flex-end; justify-content:center; padding:0 22px; overflow:hidden; }
+/* Das Produktbild wird von der Kartenkante beschnitten — wie im Vorbild. */
+@media (min-width:900px){
+  .bento__wide .bento__art{ justify-content:flex-end; padding:0 0 0 22px; }
+  .bento__wide .mock{ max-width:none; width:106%; border-radius:14px 0 0 0; }
+}
+.bento--teal{ background:var(--teal-deep); color:var(--on-dark); }
+.bento--ink{ background:var(--on-brand); color:var(--on-dark); }
+.bento--brand{ background:var(--brand); color:var(--on-brand); }
+.bento--brand .bento__label{ opacity:.78; }
+
+/* Kleine Produktbilder in den Bento-Karten */
+.mock{
+  width:100%; max-width:340px; background:#FBFAF9; color:#1A1613;
+  border-radius:14px 14px 0 0; box-shadow:var(--lift-2);
+  padding:10px; margin-bottom:-14px; font-size:.75rem;
+}
+.mock__bar{ background:var(--brand); color:var(--on-brand); border-radius:8px; padding:6px 10px; font-weight:600; font-size:.75rem; margin:-10px -10px 10px; }
+.mock__grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:4px; }
+.mock__cell{ aspect-ratio:1/1; border-radius:5px; }
+.mock__cell--e{ background:#D6D3CE center 60%/52% no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 20' fill='%23AEABA6'%3E%3Ccircle cx='12' cy='6.4' r='4.3'/%3E%3Cpath d='M2.8 20c.6-5 4.6-7.4 9.2-7.4s8.6 2.4 9.2 7.4z'/%3E%3C/svg%3E"); }
+.mock__row{ display:flex; align-items:center; gap:8px; padding:7px 4px; border-bottom:1px solid #EDEAE5; }
+.mock__av{ width:26px; height:26px; border-radius:50%; flex:none; }
+.mock__row b{ display:block; font-size:.75rem; font-weight:600; }
+.mock__row span{ display:block; font-size:.6875rem; color:#8A8177; }
+.mock__bubble{ background:#E9F1F1; border-radius:12px 12px 12px 4px; padding:8px 11px; margin:8px 0; max-width:78%; font-size:.75rem; }
+.mock__bubble--me{ background:var(--brand); color:var(--on-brand); border-radius:12px 12px 4px 12px; margin-left:auto; }
+.mock__input{ display:flex; align-items:center; gap:6px; margin-top:10px; }
+.mock__input i{ flex:1; height:26px; border:1px solid #DDD9D3; border-radius:999px; display:block; }
+.mock__send{ width:26px; height:26px; border-radius:50%; background:var(--brand); color:var(--on-brand); display:grid; place-items:center; flex:none; }
+.mock__send svg{ width:14px; height:14px; }
 
 /* ---------- Gebaerdensprache ---------- */
 .split{ display:grid; gap:clamp(2rem,4vw,3.5rem); grid-template-columns:1fr; align-items:center; }
 @media (min-width:940px){ .split{ grid-template-columns:1fr 1fr; } }
+/* Der Gebaerdenraum braucht Platz: quadratisch, so gross wie die Spalte hergibt. */
+.split--video{ align-items:center; }
+@media (min-width:940px){ .split--video{ grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr); } }
 
 .video{
-  position:relative; aspect-ratio:16/10; border-radius:var(--r-lg); overflow:hidden;
+  position:relative; aspect-ratio:1/1; border-radius:var(--r-xl); overflow:hidden;
   border:1px solid var(--hairline); background:var(--canvas-soft);
   display:flex; flex-direction:column; justify-content:space-between; box-shadow:var(--lift-1);
 }
@@ -240,22 +308,22 @@ a{ color:inherit; }
   position:absolute; inset:0;
   background:radial-gradient(66% 78% at 50% 42%, var(--brand-veil) 0%, rgba(255,236,171,0) 68%);
 }
-.video__hand{ position:absolute; inset:0; display:grid; place-items:center; color:var(--brand); }
-.video__hand svg{ width:32%; height:auto; }
+.video__hand{ position:absolute; inset:0; display:grid; place-items:center; color:var(--brand); opacity:.42; }
+.video__hand svg{ width:44%; height:auto; }
 .video__note{
-  position:relative; align-self:flex-start; margin:16px;
+  position:relative; align-self:flex-start; margin:20px;
   background:var(--canvas); border:1px solid var(--hairline); border-radius:var(--r-xs);
   padding:5px 10px; font-size:.75rem; font-weight:540; color:var(--ink-mute);
 }
 .video__play{
-  position:absolute; inset:0; margin:auto; width:68px; height:68px; border-radius:var(--r-full);
-  background:var(--brand); color:var(--on-brand); border:0; cursor:pointer;
+  position:absolute; inset:0; margin:auto; width:88px; height:88px; border-radius:var(--r-full);
+  background:var(--on-brand); color:var(--brand); border:0; cursor:pointer;
   display:grid; place-items:center; box-shadow:var(--lift-2);
 }
-.video__play svg{ width:24px; height:24px; margin-left:3px; }
+.video__play svg{ width:30px; height:30px; margin-left:4px; }
 .video__cc{
-  position:relative; margin:16px; padding:10px 14px; border-radius:var(--r-sm);
-  background:rgba(20,18,12,.86); color:#fff; font-size:.9375rem; line-height:1.35;
+  position:relative; margin:20px; padding:14px 18px; border-radius:var(--r-md);
+  background:rgba(20,18,12,.88); color:#fff; font-size:1.0625rem; line-height:1.4;
 }
 .video__cc b{ display:block; font-size:.6875rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--brand); margin-bottom:2px; }
 
@@ -284,11 +352,22 @@ body.dgs-on .dgs-panel{ display:block; }
 .dgs-panel__card span{ font-size:.875rem; color:rgba(36,28,8,.78); }
 
 /* ---------- Sicherheit ---------- */
-.steps{ list-style:none; counter-reset:s; margin:2.5rem 0 0; padding:0; display:grid; gap:1rem; }
+.steps{ list-style:none; margin:3rem 0 0; padding:0; display:grid; gap:1.25rem; }
 @media (min-width:860px){ .steps{ grid-template-columns:repeat(3,1fr); } }
-.steps li{ background:var(--canvas); border:1px solid var(--hairline); border-radius:var(--r-lg); padding:32px; display:flex; flex-direction:column; gap:.6rem; }
+.steps li{
+  background:var(--canvas-soft); border:1px solid var(--hairline); border-radius:var(--r-xl);
+  padding:32px; display:flex; flex-direction:column; gap:.75rem;
+}
 .band--soft .steps li{ background:var(--canvas); }
-.steps__n{ width:28px; height:28px; border-radius:var(--r-full); background:var(--brand); color:var(--on-brand); display:grid; place-items:center; font-size:.8125rem; font-weight:700; }
+.steps__tile{
+  width:60px; height:60px; border-radius:16px; display:grid; place-items:center;
+  color:var(--on-brand); margin-bottom:.5rem; box-shadow:var(--lift-1);
+}
+.steps__tile svg{ width:28px; height:28px; }
+.steps__tile--1{ background:linear-gradient(145deg,#FFE07A 0%,#FFB300 100%); }
+.steps__tile--2{ background:linear-gradient(145deg,#9FE0D2 0%,#2E8B7A 100%); }
+.steps__tile--3{ background:linear-gradient(145deg,#F6DCAE 0%,#DFA84E 100%); }
+.steps h3{ font-size:1.25rem; font-weight:540; letter-spacing:-.02em; margin:0; }
 .steps p{ color:var(--ink-mute); }
 
 .note{
@@ -470,27 +549,31 @@ body.dgs-on .dgs-panel{ display:block; }
 
 <main id="main">
 
-  <!-- ===== Fläche 1 — Markengelb ===== -->
-  <section class="hero on-brand" id="top">
-    <span class="hero__air" aria-hidden="true"></span>
-    <div class="shell hero__in">
-      <div class="hero__copy">
+  <!-- ===== Fläche 1 — Markengelb, zwei Hälften bis an den Rand ===== -->
+  <section class="hero" id="top">
+    <div class="hero__left">
+      <div class="hero__head">
         <span class="hero__eyebrow">Jetzt im App&nbsp;Store und bei Google&nbsp;Play</span>
         <h1 class="d-xxl">Liebe entsteht im Blickkontakt.</h1>
-        <p class="b-lg hero__lede">Die Dating-App für gehörlose, schwerhörige und taubblinde Menschen, CODAs und Gebärdensprachdolmetscher*innen. Stöbern, schreiben, sehen wer da war — ganz ohne Ton.</p>
-        <div class="hero__cta">
+        <p class="b-lg hero__lede">Die Dating-App für gehörlose, schwerhörige und taubblinde Menschen, CODAs und Gebärdensprachdolmetscher*innen. Ganz ohne Ton.</p>
+        <div class="hero__act">
           <a class="btn btn--dark btn--pill" href="#laden">App laden</a>
-          <span class="linkline cap"><a href="#laden">App&nbsp;Store</a><a href="#laden">Google&nbsp;Play</a></span>
+          <a class="hero__more" href="#app">Mehr erfahren <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"/></svg></a>
         </div>
-        <ul class="trust">
-          <li><svg aria-hidden="true"><use href="#i-check"></use></svg>ID-Verifizierung mit Prüfzeichen</li>
-          <li><svg aria-hidden="true"><use href="#i-check"></use></svg>Blockieren und melden</li>
-          <li><svg aria-hidden="true"><use href="#i-check"></use></svg>Kein Ton, kein Anruf</li>
-        </ul>
       </div>
 
-      <div class="hero__device">
-        <div class="stage">
+      <div class="toolkit">
+        <p class="toolkit__t">Vier Bereiche, ein Zuhause</p>
+        <ul>
+          <li><svg aria-hidden="true"><use href="#i-people"></use></svg><b>Stöbern</b><span>Alle Mitglieder in einem Raster</span></li>
+          <li><svg aria-hidden="true"><use href="#i-ily"></use></svg><b>Chats</b><span>Schreiben ohne Umwege</span></li>
+          <li><svg aria-hidden="true"><use href="#i-eye"></use></svg><b>Besucher</b><span>Wer auf deinem Profil war</span></li>
+          <li><svg aria-hidden="true"><use href="#i-heart"></use></svg><b>Favoriten</b><span>Wen du magst — und wer dich mag</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="hero__right">
         <div class="phone">
           <div class="screen" role="img" aria-label="Bildschirmentwurf der Taubglück-App: die Mitgliederübersicht als Raster mit Namen, Alter und Ort. Geprüfte Profile tragen ein blaues Prüfzeichen.">
             <div class="screen__bar"><span>17:47</span><span>▮▮▮</span></div>
@@ -518,32 +601,27 @@ body.dgs-on .dgs-panel{ display:block; }
             </div>
           </div>
         </div>
-        </div>
-        <div class="hero__tag">
-          <svg aria-hidden="true"><use href="#i-shield"></use></svg>
-          <span>Geprüfte Profile tragen ein Prüfzeichen</span>
-        </div>
+      <div class="hero__tag">
+        <svg aria-hidden="true"><use href="#i-shield"></use></svg>
+        <span>Geprüfte Profile tragen ein Prüfzeichen</span>
       </div>
     </div>
   </section>
 
-  <!-- ===== Fläche 2 — Weiß ===== -->
-  <section class="band" id="fuer-wen">
-    <div class="shell">
-      <p class="eyebrow">Für wen</p>
-      <ul class="tabs" style="margin-top:1.25rem;">
-        <li>gehörlos</li>
-        <li>schwerhörig</li>
-        <li>taubblind</li>
-        <li>spät ertaubt</li>
-        <li>CODA</li>
-        <li>Gebärdensprachdolmetscher*in</li>
-      </ul>
+  <!-- ===== Zielgruppe ===== -->
+  <div class="marquee">
+    <div class="marquee__track" aria-hidden="true">
+      <div class="marquee__group">
+        <span class="marquee__item">gehörlos</span><span class="marquee__item">schwerhörig</span><span class="marquee__item">taubblind</span><span class="marquee__item">spät ertaubt</span><span class="marquee__item">CODA</span><span class="marquee__item">Gebärdensprachdolmetscher*in</span>
+      </div>
+      <div class="marquee__group">
+        <span class="marquee__item">gehörlos</span><span class="marquee__item">schwerhörig</span><span class="marquee__item">taubblind</span><span class="marquee__item">spät ertaubt</span><span class="marquee__item">CODA</span><span class="marquee__item">Gebärdensprachdolmetscher*in</span>
+      </div>
     </div>
-  </section>
+  </div>
 
   <section class="band band--soft" id="gebaerde">
-    <div class="shell split">
+    <div class="shell split split--video">
       <div>
         <div class="shead">
           <p class="eyebrow">Gebärdensprache zuerst</p>
@@ -586,40 +664,84 @@ body.dgs-on .dgs-panel{ display:block; }
           <span><b>Dieser Abschnitt in DGS</b><span>Video: „Das kann die App“ · 1:12 Min · mit Untertiteln</span></span>
         </div>
       </div>
-      <div class="shead">
+      <div class="centered">
         <p class="eyebrow">Die App</p>
         <h2 class="d-xl">Suchen, schreiben, sehen wer da war.</h2>
-      </div>
-      <div class="rows">
-        <div class="row-card">
-          <svg aria-hidden="true"><use href="#i-people"></use></svg>
-          <h3 class="d-md">Stöbern statt wischen</h3>
-          <p>Alle Mitglieder in einem Raster — du schaust in Ruhe, so lange du willst. Niemand ist nach einem Wisch für immer weg.</p>
+        <p class="b-md mute">Taubglück ist kein Wischspiel. Es ist ein Ort, an dem du in Ruhe schaust, in Ruhe schreibst — und siehst, wer sich für dich interessiert hat.</p>
+        <div class="hero__act" style="justify-content:center;">
+          <a class="btn btn--dark btn--pill" href="#laden">App laden</a>
+          <a class="hero__more" href="#sicherheit">Wie wir prüfen <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"/></svg></a>
         </div>
+      </div>
+
+      <div class="bento">
+        <div class="bento__card bento__wide bento--teal">
+          <div class="bento__text">
+            <p class="bento__label">Stöbern</p>
+            <h3>Alle Mitglieder in einem Raster. Du schaust, so lange du willst — niemand ist nach einem Wisch für immer weg.</h3>
+          </div>
+          <div class="bento__art">
+            <div class="mock" aria-hidden="true">
+              <div class="mock__bar">Taubglück</div>
+              <div class="mock__grid">
+                <span class="mock__cell" style="background:linear-gradient(150deg,#8C6A46,#3E2E1F)"></span>
+                <span class="mock__cell" style="background:linear-gradient(150deg,#6E8CA0,#2C3A46)"></span>
+                <span class="mock__cell mock__cell--e"></span>
+                <span class="mock__cell" style="background:linear-gradient(150deg,#7E9E7A,#33452F)"></span>
+                <span class="mock__cell" style="background:linear-gradient(150deg,#C29A52,#6B4E1C)"></span>
+                <span class="mock__cell" style="background:linear-gradient(150deg,#A87070,#4A2A2A)"></span>
+                <span class="mock__cell mock__cell--e"></span>
+                <span class="mock__cell" style="background:linear-gradient(150deg,#9A86B0,#3D3350)"></span>
+                <span class="mock__cell" style="background:linear-gradient(150deg,#6F9E9A,#2B4442)"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bento__card bento--ink">
+          <div class="bento__text">
+            <p class="bento__label">Chats</p>
+            <h3>Schreiben ist hier der Normalfall, kein Notbehelf.</h3>
+          </div>
+          <div class="bento__art">
+            <div class="mock" aria-hidden="true">
+              <div class="mock__bubble">Hey! Ich hab dein Profil gesehen 👋</div>
+              <div class="mock__bubble mock__bubble--me">Wollen wir uns per Video gebärden?</div>
+              <div class="mock__input"><i></i><span class="mock__send"><svg><use href="#i-ily"></use></svg></span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bento__card bento--brand">
+          <div class="bento__text">
+            <p class="bento__label">Besucher und Favoriten</p>
+            <h3>Sieh, wer da war — auch wenn niemand geschrieben hat.</h3>
+          </div>
+          <div class="bento__art">
+            <div class="mock" aria-hidden="true">
+              <div class="mock__row"><span class="mock__av" style="background:linear-gradient(150deg,#6E8CA0,#2C3A46)"></span><span><b>Nikki</b><span>26 · Bayern</span></span></div>
+              <div class="mock__row"><span class="mock__av" style="background:linear-gradient(150deg,#C29A52,#6B4E1C)"></span><span><b>Mr.lindi26</b><span>26 · Bayern</span></span></div>
+              <div class="mock__row"><span class="mock__av" style="background:linear-gradient(150deg,#7E9E7A,#33452F)"></span><span><b>Xestxt8</b><span>34 · Ruhrpott</span></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rows">
         <div class="row-card">
           <svg aria-hidden="true"><use href="#i-filter"></use></svg>
           <h3 class="d-md">Sortieren und filtern</h3>
           <p>Nach Geschlecht, sexueller Orientierung, Herkunft, Religion und mehr. Du bestimmst, wer dir angezeigt wird.</p>
         </div>
         <div class="row-card">
-          <svg aria-hidden="true"><use href="#i-chat"></use></svg>
-          <h3 class="d-md">Chat ohne Umwege</h3>
-          <p>Schreiben ist hier der Normalfall, kein Notbehelf. Kein Anruf, keine Sprachnachricht, keine Ausrede.</p>
-        </div>
-        <div class="row-card">
-          <svg aria-hidden="true"><use href="#i-eye"></use></svg>
-          <h3 class="d-md">Jemand hat mich besucht</h3>
-          <p>Du siehst, wer auf deinem Profil war — auch wenn die Person noch zu schüchtern zum Schreiben war.</p>
-        </div>
-        <div class="row-card">
-          <svg aria-hidden="true"><use href="#i-heart"></use></svg>
-          <h3 class="d-md">Favoriten und „Wer mag mich?“</h3>
-          <p>Zwei Listen, eine Frage weniger: wen du dir gemerkt hast — und wer sich dich gemerkt hat.</p>
-        </div>
-        <div class="row-card">
           <svg aria-hidden="true"><use href="#i-id"></use></svg>
           <h3 class="d-md">Profile mit Charakter</h3>
           <p>Identität, Gewohnheiten, „Ich suche“, Lieblingsessen, was du magst — und was gar nicht geht.</p>
+        </div>
+        <div class="row-card">
+          <svg aria-hidden="true"><use href="#i-block"></use></svg>
+          <h3 class="d-md">Melden und blockieren</h3>
+          <p>Ein Tippen genügt. Wer stört, ist weg — und wir schauen uns den Fall an.</p>
         </div>
       </div>
     </div>
@@ -640,18 +762,18 @@ body.dgs-on .dgs-panel{ display:block; }
       </div>
       <ol class="steps">
         <li>
-          <span class="steps__n">1</span>
-          <h3 class="d-md">Ausweis hochladen</h3>
+          <span class="steps__tile steps__tile--1" aria-hidden="true"><svg><use href="#i-id"></use></svg></span>
+          <h3>Ausweis hochladen</h3>
           <p>In den Einstellungen unter <em>ID-Verifizierung</em>. Dauert zwei Minuten, einmalig.</p>
         </li>
         <li>
-          <span class="steps__n">2</span>
-          <h3 class="d-md">Wir prüfen</h3>
+          <span class="steps__tile steps__tile--2" aria-hidden="true"><svg><use href="#i-shield"></use></svg></span>
+          <h3>Wir prüfen</h3>
           <p>Wir gleichen Name, Alter und Foto ab. Der Ausweis wird nie Teil deines Profils.</p>
         </li>
         <li>
-          <span class="steps__n">3</span>
-          <h3 class="d-md">Prüfzeichen am Profil</h3>
+          <span class="steps__tile steps__tile--3" aria-hidden="true"><svg><use href="#i-check"></use></svg></span>
+          <h3>Prüfzeichen am Profil</h3>
           <p>Das blaue Zeichen begleitet dich überall in der App — im Raster, im Chat, auf deinem Profil.</p>
         </li>
       </ol>

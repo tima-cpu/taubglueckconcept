@@ -85,10 +85,16 @@ Grautönen. Ein vierter Farbton würde die Ordnung brechen.
 | Abstände | 8-px-Basis, 64–96 px zwischen Abschnitten, bis 128 px im Schlussband |
 | Container | 1100 px, Lesetext auf 62 Zeichen |
 
-Der Kopf nutzt das **angeschnittene Motiv** des Systems: Statt einer Porträtaufnahme läuft
-das Gerät mit der echten Rasteransicht unten aus der gelben Fläche heraus. Die Tiefe
-kommt wie im Original aus einem atmosphärischen Verlauf — hier warme Gelbtöne statt
-Violett-Himmel.
+Der Kopf ist in **zwei Hälften bis an den Rand** geteilt: links das Markengelb mit
+Schlagzeile, einer Aktion und einer Zeilenliste der vier App-Bereiche, rechts die
+Produktaufnahme auf einem warmen Verlauf, unten angeschnitten. Die Kopfleiste bleibt weiß
+und sitzt über beiden Hälften.
+
+Der Abschnitt „Die App“ läuft als **Bento-Raster**: eine breite Karte, darunter zwei
+mittlere, jede mit Label, Aussage und einem von der Kartenkante beschnittenen Produktbild.
+Die Sicherheitskarten tragen **Verlaufskacheln** statt Nummern. Der Gebärdenraum ist
+bewusst **quadratisch und groß** — die Videofläche ist der Ort, an dem die Sprache der
+Zielgruppe stattfindet, und darf nicht die kleinste Fläche der Seite sein.
 
 ### Abweichung vom System
 
