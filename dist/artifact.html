@@ -11,29 +11,32 @@
    Layout : "Sichtachsen" — breite Bänder, freie Blickfelder, viel Luft
    ============================================================ */
 
+/* Eine bewusst helle Seite — kein Dunkelmodus. Alle Farben sind explizit
+   gesetzt, damit die Seite auf jedem Hintergrund gleich aussieht. */
 :root{
-  /* dunkel = Standard (Dark-first) */
-  --bg:        #171412;
-  --bg-2:      #1F1B18;
-  --bg-3:      #29241F;
-  --line:      #3A332C;
-  --line-soft: #2A251F;
+  color-scheme: light;
 
-  --fg:        #F6F3EE;
-  --fg-2:      #C3BAAF;
-  --fg-3:      #8E857A;
+  --bg:        #FAF8F4;   /* warmes Papier */
+  --bg-2:      #FFFFFF;   /* erhobene Flaechen, Baender */
+  --bg-3:      #F1EDE4;   /* vertiefte Flaechen */
+  --line:      #DAD3C7;
+  --line-soft: #E9E4DA;
 
-  --gold:      #FFC21A;
+  --fg:        #191512;
+  --fg-2:      #4C443B;
+  --fg-3:      #7A7065;
+
+  --gold:      #FFC21A;   /* Markengelb — als Flaeche, nicht als Text */
   --gold-ink:  #17130A;   /* Text auf Gold */
-  --gold-text: #FFC21A;   /* Gold als Textfarbe */
-  --gold-soft: rgba(255,194,26,.12);
+  --gold-text: #6E4B00;   /* tiefes Gold fuer Labels */
+  --gold-soft: rgba(255,194,26,.22);
 
-  --verify:    #5BC8A8;
-  --verify-soft: rgba(91,200,168,.14);
-  --coral:     #FF8B78;
+  --verify:    #147054;
+  --verify-soft: rgba(20,112,84,.11);
+  --coral:     #B93E2B;
 
-  --shadow: 0 1px 2px rgba(0,0,0,.4), 0 18px 44px -18px rgba(0,0,0,.75);
-  --shadow-lift: 0 2px 4px rgba(0,0,0,.35), 0 34px 70px -24px rgba(0,0,0,.85);
+  --shadow: 0 1px 2px rgba(64,48,20,.06), 0 16px 40px -20px rgba(64,48,20,.28);
+  --shadow-lift: 0 2px 4px rgba(64,48,20,.07), 0 34px 70px -26px rgba(64,48,20,.34);
 
   --measure: 62ch;
   --band: clamp(4.5rem, 9vw, 8.5rem);
@@ -43,55 +46,6 @@
   --ff-display: "Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
   --ff-body: "Atkinson Hyperlegible", "Verdana", system-ui, sans-serif;
   --ff-mono: "DM Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
-}
-
-@media (prefers-color-scheme: light){
-  :root:not([data-theme="dark"]){
-    --bg:        #FBF8F3;
-    --bg-2:      #FFFFFF;
-    --bg-3:      #F2ECE1;
-    --line:      #DCD3C5;
-    --line-soft: #EAE3D7;
-
-    --fg:        #1A1613;
-    --fg-2:      #4E463D;
-    --fg-3:      #776C60;
-
-    --gold:      #FFC21A;
-    --gold-ink:  #17130A;
-    --gold-text: #7A5500;
-    --gold-soft: rgba(255,194,26,.20);
-
-    --verify:    #157A5C;
-    --verify-soft: rgba(21,122,92,.12);
-    --coral:     #C2432F;
-
-    --shadow: 0 1px 2px rgba(60,45,20,.06), 0 16px 40px -20px rgba(60,45,20,.30);
-    --shadow-lift: 0 2px 4px rgba(60,45,20,.07), 0 34px 70px -26px rgba(60,45,20,.38);
-  }
-}
-:root[data-theme="light"]{
-  --bg:        #FBF8F3;
-  --bg-2:      #FFFFFF;
-  --bg-3:      #F2ECE1;
-  --line:      #DCD3C5;
-  --line-soft: #EAE3D7;
-
-  --fg:        #1A1613;
-  --fg-2:      #4E463D;
-  --fg-3:      #776C60;
-
-  --gold:      #FFC21A;
-  --gold-ink:  #17130A;
-  --gold-text: #7A5500;
-  --gold-soft: rgba(255,194,26,.20);
-
-  --verify:    #157A5C;
-  --verify-soft: rgba(21,122,92,.12);
-  --coral:     #C2432F;
-
-  --shadow: 0 1px 2px rgba(60,45,20,.06), 0 16px 40px -20px rgba(60,45,20,.30);
-  --shadow-lift: 0 2px 4px rgba(60,45,20,.07), 0 34px 70px -26px rgba(60,45,20,.38);
 }
 
 *,*::before,*::after{ box-sizing:border-box; }
@@ -187,7 +141,10 @@ a{ color:inherit; }
   min-height:78px;
 }
 .brand{ display:flex; align-items:center; gap:.7rem; text-decoration:none; font-family:var(--ff-display); font-weight:800; font-size:1.32rem; letter-spacing:-.03em; }
-.brand__mark{ width:34px; height:34px; display:block; color:var(--gold); flex:none; }
+.brand__mark{
+  width:36px; height:36px; flex:none; display:block; padding:5px;
+  background:var(--gold); color:var(--gold-ink); border-radius:10px;
+}
 .nav{ display:flex; gap:1.6rem; margin-left:auto; }
 .nav a{ text-decoration:none; color:var(--fg-2); font-size:1rem; padding:.35rem 0; border-bottom:2px solid transparent; }
 .nav a:hover{ color:var(--fg); border-bottom-color:var(--gold); }
@@ -230,7 +187,16 @@ a{ color:inherit; }
 @media (min-width:980px){ .hero__in{ grid-template-columns:1.05fr .95fr; } }
 
 .hero__copy{ display:flex; flex-direction:column; gap:1.6rem; align-items:flex-start; }
-.hero h1 .accent{ color:var(--gold-text); }
+.hero h1 .accent{
+  color:var(--fg);
+  background-image:linear-gradient(var(--gold), var(--gold));
+  background-repeat:no-repeat;
+  background-size:100% .80em;
+  background-position:0 .21em;
+  padding-inline:.05em;
+  -webkit-box-decoration-break:clone;
+  box-decoration-break:clone;
+}
 .hero__actions{ display:flex; flex-wrap:wrap; gap:.85rem; }
 
 .stores{ display:flex; flex-wrap:wrap; gap:.7rem; }
@@ -251,16 +217,13 @@ a{ color:inherit; }
 .trust svg{ width:17px; height:17px; color:var(--verify); flex:none; }
 
 /* ---------- Telefon-Mockup ---------- */
-.stage{ position:relative; display:grid; place-items:center; padding:2.2rem .5rem 3.1rem; }
+.stage{ position:relative; display:grid; place-items:center; padding:1.5rem .5rem 3rem; }
 .phone{
   position:relative; width:min(316px, 80vw); aspect-ratio:9/18.4;
-  background:var(--bg-3); border:10px solid #14110E;
+  background:var(--bg-3); border:10px solid #231E18;
   border-radius:44px; box-shadow:var(--shadow-lift);
   overflow:hidden; flex:none;
 }
-:root[data-theme="light"] .phone,
-:root:not([data-theme="dark"]) .phone{ border-color:#231E18; }
-@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .phone{ border-color:#0E0C0A; } }
 
 .screen{ position:absolute; inset:0; background:#F1F0EE; color:#1A1613; display:flex; flex-direction:column; font-size:.8rem; }
 .screen__bar{ display:flex; align-items:center; justify-content:space-between; padding:.55rem .9rem .3rem; background:#FFC21A; font-family:var(--ff-mono); font-size:.6rem; color:#4A3B12; }
@@ -271,7 +234,12 @@ a{ color:inherit; }
 .screen__sub span{ flex:1; text-align:center; padding:.42rem 0; font-size:.66rem; color:#4E463D; }
 .screen__sub span+span{ border-left:1px solid #D8D5D0; }
 
-.grid{ flex:1; min-height:0; overflow:hidden; display:grid; grid-template-columns:repeat(3,1fr); gap:2px; padding:2px; align-content:start; }
+.grid{
+  flex:1; min-height:0; overflow:hidden; display:grid; grid-template-columns:repeat(3,1fr);
+  gap:2px; padding:2px; align-content:start;
+  -webkit-mask-image:linear-gradient(#000 84%, transparent 99%);
+  mask-image:linear-gradient(#000 84%, transparent 99%);
+}
 .tile{ position:relative; display:flex; flex-direction:column; background:#C9C6C1; }
 .tile__img{ aspect-ratio:1/1; background-size:cover; background-position:center; position:relative; }
 .tile--a .tile__img{ background:linear-gradient(150deg,#8C6A46,#3E2E1F); }
@@ -295,7 +263,7 @@ a{ color:inherit; }
 }
 .tile__verify svg{ width:7px; height:7px; }
 .screen__sample{
-  position:absolute; z-index:2; bottom:.2rem; left:50%; translate:-50% 0; white-space:nowrap;
+  position:absolute; z-index:2; bottom:.1rem; left:50%; translate:-50% 0; white-space:nowrap;
   font-family:var(--ff-mono); font-size:.62rem; letter-spacing:.12em; text-transform:uppercase;
   background:var(--bg-2); color:var(--fg-3); border:1px solid var(--line);
   border-radius:999px; padding:.3rem .75rem;
@@ -312,9 +280,9 @@ a{ color:inherit; }
 .chip-float svg{ width:19px; height:19px; flex:none; }
 .chip-float--verify{ top:-.2rem; right:-1.4rem; color:var(--fg); }
 .chip-float--verify svg{ color:var(--verify); }
-.chip-float--chat{ bottom:2.9rem; left:-2rem; }
+.chip-float--chat{ top:47%; left:-3.4rem; max-width:202px; }
 .chip-float--chat svg{ color:var(--gold-text); }
-@media (max-width:1180px){ .chip-float--verify{ right:-.2rem; } .chip-float--chat{ left:-.4rem; } }
+@media (max-width:1180px){ .chip-float--verify{ right:-.4rem; } .chip-float--chat{ left:-1.2rem; } }
 @media (max-width:560px){ .chip-float{ display:none; } }
 
 /* ---------- Zielgruppen-Laufband ---------- */
@@ -373,7 +341,7 @@ a{ color:inherit; }
 
 .dgs__list{ list-style:none; margin:1.4rem 0 0; padding:0; display:flex; flex-direction:column; gap:1.1rem; }
 .dgs__list li{ display:flex; gap:.9rem; align-items:flex-start; max-width:var(--measure); }
-.dgs__list svg{ width:22px; height:22px; color:var(--gold-text); flex:none; margin-top:.28rem; }
+.dgs__list svg{ width:22px; height:22px; color:var(--fg); flex:none; margin-top:.28rem; }
 .dgs__list strong{ display:block; }
 .dgs__list span{ color:var(--fg-2); font-size:1.02rem; }
 .proposal{
@@ -403,15 +371,15 @@ body.dgs-on .dgs-panel{ display:block; }
 .feat{ display:grid; gap:1px; background:var(--line-soft); border:1px solid var(--line-soft); border-radius:var(--radius); overflow:hidden; margin-top:3rem; }
 @media (min-width:720px){ .feat{ grid-template-columns:repeat(2,1fr); } }
 @media (min-width:1040px){ .feat{ grid-template-columns:repeat(3,1fr); } }
-.feat__item{ background:var(--bg); padding:2rem 1.7rem; display:flex; flex-direction:column; gap:.7rem; }
-.feat__icon{ width:30px; height:30px; color:var(--gold-text); }
+.feat__item{ background:var(--bg-2); padding:2rem 1.7rem; display:flex; flex-direction:column; gap:.7rem; }
+.feat__icon{ width:30px; height:30px; color:var(--fg); }
 .feat__item p{ color:var(--fg-2); font-size:1.02rem; }
 
 /* ---------- Sicherheit ---------- */
 .safe{ background:var(--bg-2); border-block:1px solid var(--line-soft); position:relative; overflow:hidden; }
 .safe__mark{
   position:absolute; right:-4%; top:50%; translate:0 -50%;
-  width:min(420px,38%); color:var(--gold); opacity:.06; pointer-events:none;
+  width:min(420px,38%); color:var(--gold); opacity:.13; pointer-events:none;
 }
 .safe__in{ position:relative; }
 .steps{ counter-reset:s; list-style:none; margin:3rem 0 0; padding:0; display:grid; gap:1.6rem; }
@@ -436,7 +404,7 @@ body.dgs-on .dgs-panel{ display:block; }
   border:1.5px solid var(--line); border-radius:14px; padding:1.4rem;
   display:flex; flex-direction:column; gap:.5rem; background:var(--bg-2);
 }
-.disc__card svg{ width:24px; height:24px; color:var(--gold-text); }
+.disc__card svg{ width:24px; height:24px; color:var(--fg); }
 .disc__card h3{ font-size:1.08rem; }
 .disc__card p{ font-size:.98rem; color:var(--fg-2); }
 
@@ -450,7 +418,7 @@ body.dgs-on .dgs-panel{ display:block; }
 .faq summary::-webkit-details-marker{ display:none; }
 .faq summary::after{
   content:""; position:absolute; right:.4rem; top:50%; width:13px; height:13px;
-  border-right:2.5px solid var(--gold); border-bottom:2.5px solid var(--gold);
+  border-right:2.5px solid var(--fg-2); border-bottom:2.5px solid var(--fg-2);
   translate:0 -70%; rotate:45deg; transition:rotate .22s ease;
 }
 .faq details[open] summary::after{ rotate:225deg; translate:0 -20%; }

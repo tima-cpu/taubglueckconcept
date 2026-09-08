@@ -56,18 +56,24 @@ Weitere tragende Entscheidungen:
 
 ## Gestaltung
 
-**Farbe** — dunkler warmer Grund, Markengelb als einziger lauter Akzent.
+**Farbe** — helles warmes Papier, Markengelb als einziger lauter Akzent.
 
 | Token | Wert | Rolle |
 |---|---|---|
-| `--bg` | `#171412` | warmes Tintenschwarz, Grundfläche |
+| `--bg` | `#FAF8F4` | warmes Papier, Grundfläche |
+| `--bg-2` | `#FFFFFF` | erhobene Flächen und Bänder |
 | `--gold` | `#FFC21A` | Markengelb (aus dem Bestand übernommen) |
-| `--fg` | `#F6F3EE` | Fließtext |
-| `--verify` | `#5BC8A8` | Semantik: geprüft |
-| `--coral` | `#FF8B78` | sparsam, für die warmen Momente |
+| `--fg` | `#191512` | Fließtext |
+| `--gold-text` | `#6E4B00` | tiefes Gold für Labels |
+| `--verify` | `#147054` | Semantik: geprüft |
 
-Hell- und Dunkelmodus sind vollständig über Tokens gebaut und folgen der Einstellung der
-Besucher\*innen.
+**Gelb ist eine Fläche, keine Textfarbe.** Auf hellem Grund wird Gelb als Text schnell
+matschig. Es trägt hier deshalb Blöcke: den Marker hinter „Blickkontakt“, die Buttons, das
+Logo-Plättchen, den DGS-Schalter im aktiven Zustand, das Schlussband. Text und Symbole
+bleiben tiefschwarz — genau das Verhältnis, das die Marke ohnehin schon nutzt.
+
+Die Seite ist bewusst **einthemig hell**: kein Dunkelmodus, alle Farben explizit gesetzt.
+Sie sieht damit für alle gleich aus, unabhängig von der Systemeinstellung.
 
 **Schrift**
 
